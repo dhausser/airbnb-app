@@ -15,7 +15,8 @@
     "generate:prisma": "prisma generate",
     "generate:nexus": "NODE_ENV=development ts-node --transpile-only apollo/schema",
     "generate": "yarn run generate:prisma && yarn run generate:nexus",
-    "postinstall": "yarn run generate"
+    "postinstall": "yarn run generate",
+    "codegen": "apollo client:codegen --target typescript --watch"
   },
   "husky": {
     "hooks": {
@@ -47,6 +48,7 @@
     "@types/testing-library__react": "^10.0.0",
     "@typescript-eslint/eslint-plugin": "^2.25.0",
     "@typescript-eslint/parser": "^2.25.0",
+    "apollo": "^2.30.1",
     "babel-jest": "^25.2.3",
     "eslint": "^6.8.0",
     "eslint-config-prettier": "^6.10.1",
