@@ -17,10 +17,10 @@ const schema = makeSchema({
     }),
   ],
   outputs: {
-    schema: path.join(__dirname, './generated/schema.gen.graphql'),
-    typegen: path.join(__dirname, './generated/nexusTypes.gen.ts'),
+    schema: path.resolve(process.cwd(), './generated/schema.gen.graphql'),
+    typegen: path.resolve(process.cwd(), './generated/nexusTypes.gen.ts'),
   },
-  // prettierConfig: require.resolve('../../.prettierrc'),
+  prettierConfig: path.resolve(process.cwd(), './prettierrc'),
 })
 
 const apolloServer = new ApolloServer({
