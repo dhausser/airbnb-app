@@ -11,7 +11,11 @@
     "format": "prettier --write \"**/*.{js,ts,tsx}\"",
     "lint": "eslint . --ext ts --ext tsx --ext js",
     "test": "jest",
-    "test-all": "yarn lint && yarn type-check && yarn test"
+    "test-all": "yarn lint && yarn type-check && yarn test",
+    "generate:prisma": "prisma generate",
+    "generate:nexus": "NODE_ENV=development ts-node --transpile-only apollo/schema",
+    "generate": "yarn run generate:prisma && yarn run generate:nexus",
+    "postinstall": "yarn run generate"
   },
   "husky": {
     "hooks": {
@@ -26,7 +30,12 @@
     ]
   },
   "dependencies": {
+    "@apollo/client": "^3.0.2",
+    "@nexus/schema": "^0.14.0",
+    "apollo-server-micro": "^2.16.0",
+    "graphql": "^15.3.0",
     "next": "latest",
+    "nexus-plugin-prisma": "^0.16.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1"
   },
