@@ -1,4 +1,4 @@
-import { queryType } from '@nexus/schema'
+import { queryType, idArg } from '@nexus/schema'
 
 // export const Query = queryType({
 //   definition(t) {
@@ -13,6 +13,18 @@ import { queryType } from '@nexus/schema'
 
 export const Query = queryType({
   definition(t) {
+    t.field('post', {
+      type: 'Post',
+      args: {
+        id: idArg(),
+      },
+      async resolve(_root, args, ctx) {
+        return ctx.prisma.post.findOne({
+          where: { id: parseInt(args.id) },
+          include: { author: true },
+        })
+      },
+    })
     t.list.field('posts', {
       type: 'Post',
       async resolve(_root, _args, ctx) {

@@ -5,7 +5,7 @@ import { createContext } from './context'
 import * as types from '../../apollo/schema'
 import * as path from 'path'
 
-const schema = makeSchema({
+export const schema = makeSchema({
   types,
   typegenAutoConfig: {
     contextType: '{ prisma: PrismaClient.PrismaClient }',
@@ -20,7 +20,6 @@ const schema = makeSchema({
     schema: path.resolve(process.cwd(), './__generated__/schema.graphql'),
     typegen: path.resolve(process.cwd(), './__generated__/nexusTypes.ts'),
   },
-  // prettierConfig: require.resolve('./../../.prettierrc'),
 })
 
 const apolloServer = new ApolloServer({

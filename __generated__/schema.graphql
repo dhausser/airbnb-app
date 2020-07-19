@@ -34,6 +34,7 @@ type Profile {
 }
 
 type Query {
+  post(id: ID): Post!
   posts: [Post!]!
   profiles: [Profile!]!
   users: [User!]!

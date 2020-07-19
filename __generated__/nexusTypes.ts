@@ -81,6 +81,7 @@ export interface NexusGenFieldTypes {
   }
   Query: {
     // field return type
+    post: NexusGenRootTypes['Post'] // Post!
     posts: NexusGenRootTypes['Post'][] // [Post!]!
     profiles: NexusGenRootTypes['Profile'][] // [Profile!]!
     users: NexusGenRootTypes['User'][] // [User!]!
@@ -106,6 +107,12 @@ export interface NexusGenArgTypes {
       // args
       email: string // String!
       name?: string | null // String
+    }
+  }
+  Query: {
+    post: {
+      // args
+      id?: string | null // ID
     }
   }
 }

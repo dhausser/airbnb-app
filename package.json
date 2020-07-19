@@ -12,11 +12,11 @@
     "lint": "eslint . --ext ts --ext tsx --ext js",
     "test": "jest",
     "test-all": "yarn lint && yarn type-check && yarn test",
+    "codegen": "apollo client:codegen --target typescript --watch",
     "generate:prisma": "prisma generate",
-    "generate:nexus": "NODE_ENV=development ts-node --transpile-only apollo/schema",
+    "generate:nexus": "NODE_ENV=development ts-node --transpile-only src/apollo/schema",
     "generate": "yarn run generate:prisma && yarn run generate:nexus",
-    "postinstall": "yarn run generate",
-    "codegen": "apollo client:codegen --target typescript --watch"
+    "postinstall": "yarn run generate"
   },
   "husky": {
     "hooks": {
@@ -58,6 +58,7 @@
     "jest-watch-typeahead": "^0.5.0",
     "lint-staged": "^10.0.10",
     "prettier": "^2.0.2",
+    "ts-node": "^8.10.2",
     "typescript": "^3.8.3"
   }
 }
