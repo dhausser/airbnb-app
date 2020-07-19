@@ -1,17 +1,40 @@
 import React from 'react'
-import { render, fireEvent } from '../testUtils'
+import { render } from '../testUtils'
 import { Home } from '../../pages/index'
+
+const posts = [
+  {
+    id: 1,
+    title: 'Hello World',
+    content: 'This is the first hello world content',
+    author: {
+      email: 'alice@prisma.io',
+    },
+    published: false,
+  },
+  {
+    id: 2,
+    title: 'Hello Second World',
+    content: 'This is the second hello world content',
+    author: {
+      email: 'mark@prisma.io',
+    },
+    published: false,
+  },
+  {
+    id: 3,
+    title: 'Hello Third World',
+    content: 'This is the third hello world content',
+    author: {
+      email: 'rob@prisma.io',
+    },
+    published: true,
+  },
+]
 
 describe('Home page', () => {
   it('matches snapshot', () => {
-    const { asFragment } = render(<Home />, {})
+    const { asFragment } = render(<Home posts={posts} />, {})
     expect(asFragment()).toMatchSnapshot()
-  })
-
-  it('clicking button triggers alert', () => {
-    const { getByText } = render(<Home />, {})
-    window.alert = jest.fn()
-    fireEvent.click(getByText('Test Button'))
-    expect(window.alert).toHaveBeenCalledWith('With typescript and Jest')
   })
 })

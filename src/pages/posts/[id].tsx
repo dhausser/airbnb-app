@@ -17,7 +17,7 @@ const PostQuery = gql`
   }
 `
 
-const Post = ({ post }): JSX.Element => {
+export const Post = ({ post }): JSX.Element => {
   // const router = useRouter()
   // const { id } = router.query
 
