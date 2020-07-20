@@ -10,9 +10,11 @@ export const Post = objectType({
       type: 'User',
       nullable: true,
       resolve(parent, _args, ctx) {
-        return ctx.prisma.user.findOne({
-          where: { id: parent.authorId },
-        })
+        return ctx.prisma.post
+          .findOne({
+            where: { id: parent.id },
+          })
+          .author()
       },
     })
     t.boolean('published')

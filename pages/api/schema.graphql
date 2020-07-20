@@ -18,7 +18,8 @@ type Post {
 type Profile {
   bio: String
   id: ID!
-  user: User!
+  user: User
+  userId: String
 }
 
 type Query {

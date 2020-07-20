@@ -16,6 +16,10 @@ export const createContext = (): Context => ({
 
 export const schema = makeSchema({
   types,
+  typegenAutoConfig: {
+    contextType: '{ prisma: PrismaClient.PrismaClient }',
+    sources: [{ source: '.prisma/client', alias: 'PrismaClient' }],
+  },
   outputs: {
     schema: path.join(process.cwd(), 'pages', 'api', 'schema.graphql'),
     typegen: path.join(process.cwd(), 'pages', 'api', 'nexusTypes.ts'),
