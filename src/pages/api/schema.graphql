@@ -2,21 +2,9 @@
 ### Do not make changes to this file directly
 
 
-type CreatePostResponse {
-  message: String
-  posts: [Post!]
-  success: Boolean!
-}
-
-type CreateUserResponse {
-  message: String
-  success: Boolean!
-  users: [User!]
-}
-
 type Mutation {
-  createPost(content: String!, title: String!): CreatePostResponse!
-  createUser(email: String!, name: String): CreateUserResponse!
+  createDraft(authorEmail: String, content: String, title: String!): Post!
+  signupUser(email: String!, name: String): User!
 }
 
 type Post {
@@ -34,7 +22,7 @@ type Profile {
 }
 
 type Query {
-  post(id: ID): Post!
+  post(id: String): Post!
   posts: [Post!]!
   profiles: [Profile!]!
   users: [User!]!

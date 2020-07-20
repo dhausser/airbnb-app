@@ -1,41 +1,32 @@
-import { queryType, idArg } from '@nexus/schema'
-
-// export const Query = queryType({
-//   definition(t) {
-//     t.crud.user()
-//     t.crud.users()
-//     t.crud.post()
-//     t.crud.posts()
-//     t.crud.profile()
-//     t.crud.profiles()
-//   },
-// })
+import { queryType, stringArg } from '@nexus/schema'
 
 export const Query = queryType({
   definition(t) {
     t.field('post', {
       type: 'Post',
       args: {
-        id: idArg(),
+        id: stringArg(),
       },
-      async resolve(_root, args, ctx) {
+      resolve(_parent, { id }, ctx) {
         return ctx.prisma.post.findOne({
-          where: { id: parseInt(args.id) },
+          where: { id: Number(id) },
           include: { author: true },
         })
       },
     })
+
     t.list.field('posts', {
       type: 'Post',
-      async resolve(_root, _args, ctx) {
+      resolve(_parent, _args, ctx) {
         return ctx.prisma.post.findMany({
           include: { author: true },
         })
       },
     })
+
     t.list.field('users', {
       type: 'User',
-      async resolve(_root, _args, ctx) {
+      resolve(_parent, _args, ctx) {
         return ctx.prisma.user.findMany({
           include: {
             posts: true,
@@ -44,9 +35,10 @@ export const Query = queryType({
         })
       },
     })
+
     t.list.field('profiles', {
       type: 'Profile',
-      async resolve(_root, _args, ctx) {
+      resolve(_parent, _args, ctx) {
         return ctx.prisma.profile.findMany({
           include: {
             user: true,

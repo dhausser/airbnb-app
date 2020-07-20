@@ -9,23 +9,12 @@ export const User = objectType({
     t.list.field('posts', {
       type: 'Post',
       nullable: true,
-      resolve(user, _args, ctx) {
+      resolve(parent, _args, ctx) {
         return ctx.prisma.post.findMany({
-          where: { authorId: user.id },
+          where: { authorId: parent.id },
         })
       },
     })
     t.field('profile', { type: 'Profile', nullable: true })
   },
 })
-
-// export const User = objectType({
-//   name: 'User',
-//   definition: (t) => {
-//     t.model.id()
-//     t.model.email()
-//     t.model.name()
-//     t.model.posts()
-//     t.model.profile()
-//   }
-// });

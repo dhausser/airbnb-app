@@ -21,18 +21,6 @@ export interface NexusGenInputs {}
 export interface NexusGenEnums {}
 
 export interface NexusGenRootTypes {
-  CreatePostResponse: {
-    // root type
-    message?: string | null // String
-    posts?: NexusGenRootTypes['Post'][] | null // [Post!]
-    success: boolean // Boolean!
-  }
-  CreateUserResponse: {
-    // root type
-    message?: string | null // String
-    success: boolean // Boolean!
-    users?: NexusGenRootTypes['User'][] | null // [User!]
-  }
   Mutation: {}
   Post: PrismaClient.Post
   Profile: PrismaClient.Profile
@@ -48,22 +36,10 @@ export interface NexusGenRootTypes {
 export interface NexusGenAllTypes extends NexusGenRootTypes {}
 
 export interface NexusGenFieldTypes {
-  CreatePostResponse: {
-    // field return type
-    message: string | null // String
-    posts: NexusGenRootTypes['Post'][] | null // [Post!]
-    success: boolean // Boolean!
-  }
-  CreateUserResponse: {
-    // field return type
-    message: string | null // String
-    success: boolean // Boolean!
-    users: NexusGenRootTypes['User'][] | null // [User!]
-  }
   Mutation: {
     // field return type
-    createPost: NexusGenRootTypes['CreatePostResponse'] // CreatePostResponse!
-    createUser: NexusGenRootTypes['CreateUserResponse'] // CreateUserResponse!
+    createDraft: NexusGenRootTypes['Post'] // Post!
+    signupUser: NexusGenRootTypes['User'] // User!
   }
   Post: {
     // field return type
@@ -98,12 +74,13 @@ export interface NexusGenFieldTypes {
 
 export interface NexusGenArgTypes {
   Mutation: {
-    createPost: {
+    createDraft: {
       // args
-      content: string // String!
+      authorEmail?: string | null // String
+      content?: string | null // String
       title: string // String!
     }
-    createUser: {
+    signupUser: {
       // args
       email: string // String!
       name?: string | null // String
@@ -112,7 +89,7 @@ export interface NexusGenArgTypes {
   Query: {
     post: {
       // args
-      id?: string | null // ID
+      id?: string | null // String
     }
   }
 }
@@ -122,8 +99,6 @@ export interface NexusGenAbstractResolveReturnTypes {}
 export interface NexusGenInheritedFields {}
 
 export type NexusGenObjectNames =
-  | 'CreatePostResponse'
-  | 'CreateUserResponse'
   | 'Mutation'
   | 'Post'
   | 'Profile'

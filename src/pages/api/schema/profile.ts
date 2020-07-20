@@ -7,20 +7,11 @@ export const Profile = objectType({
     t.string('bio', { nullable: true })
     t.field('user', {
       type: 'User',
-      resolve(profile, _args, ctx) {
+      resolve(parent, _args, ctx) {
         return ctx.prisma.user.findOne({
-          where: { id: profile.userId },
+          where: { id: parent.userId },
         })
       },
     })
   },
 })
-
-// export const Profile = objectType({
-//   name: 'Profile',
-//   definition: (t) => {
-//     t.model.id()
-//     t.model.bio()
-//     t.model.user()
-//   }
-// });
