@@ -14,7 +14,7 @@
     "test-all": "yarn lint && yarn type-check && yarn test",
     "codegen": "apollo client:codegen --target typescript --watch",
     "generate:prisma": "prisma generate",
-    "generate:nexus": "ts-node --transpile-only -P nexus.tsconfig.json src/pages/api/schema",
+    "generate:nexus": "ts-node --transpile-only -P nexus.tsconfig.json pages/api/schema",
     "generate": "yarn run generate:prisma && yarn run generate:nexus",
     "postinstall": "yarn run generate"
   },

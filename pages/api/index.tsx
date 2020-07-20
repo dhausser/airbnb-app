@@ -17,8 +17,8 @@ export const createContext = (): Context => ({
 export const schema = makeSchema({
   types,
   outputs: {
-    schema: path.join(process.cwd(), 'src', 'pages', 'api', 'schema.graphql'),
-    typegen: path.join(process.cwd(), 'src', 'pages', 'api', 'nexusTypes.ts'),
+    schema: path.join(process.cwd(), 'pages', 'api', 'schema.graphql'),
+    typegen: path.join(process.cwd(), 'pages', 'api', 'nexusTypes.ts'),
   },
 })
 

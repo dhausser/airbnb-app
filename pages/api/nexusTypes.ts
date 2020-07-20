@@ -3,15 +3,6 @@
  * Do not make changes to this file directly
  */
 
-import * as PrismaClient from '.prisma/client'
-
-declare global {
-  interface NexusGenCustomOutputProperties<TypeName extends string> {
-    crud: NexusPrisma<TypeName, 'crud'>
-    model: NexusPrisma<TypeName, 'model'>
-  }
-}
-
 declare global {
   interface NexusGen extends NexusGenTypes {}
 }
@@ -22,10 +13,26 @@ export interface NexusGenEnums {}
 
 export interface NexusGenRootTypes {
   Mutation: {}
-  Post: PrismaClient.Post
-  Profile: PrismaClient.Profile
+  Post: {
+    // root type
+    content?: string | null // String
+    id: string // ID!
+    published: boolean // Boolean!
+    title: string // String!
+  }
+  Profile: {
+    // root type
+    bio?: string | null // String
+    id: string // ID!
+  }
   Query: {}
-  User: PrismaClient.User
+  User: {
+    // root type
+    email: string // String!
+    id: string // ID!
+    name?: string | null // String
+    profile?: NexusGenRootTypes['Profile'] | null // Profile
+  }
   String: string
   Int: number
   Float: number
@@ -116,7 +123,7 @@ export type NexusGenScalarNames = 'Boolean' | 'Float' | 'ID' | 'Int' | 'String'
 export type NexusGenUnionNames = never
 
 export interface NexusGenTypes {
-  context: { prisma: PrismaClient.PrismaClient }
+  context: any
   inputTypes: NexusGenInputs
   rootTypes: NexusGenRootTypes
   argTypes: NexusGenArgTypes
