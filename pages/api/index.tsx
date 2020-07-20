@@ -1,18 +1,8 @@
 import { makeSchema } from '@nexus/schema'
-import { PrismaClient } from '@prisma/client'
+import { createContext } from './context'
 import { ApolloServer } from 'apollo-server-micro'
 import * as types from './schema'
 import * as path from 'path'
-
-const prisma = new PrismaClient()
-
-export type Context = {
-  prisma: PrismaClient
-}
-
-export const createContext = (): Context => ({
-  prisma,
-})
 
 export const schema = makeSchema({
   types,
