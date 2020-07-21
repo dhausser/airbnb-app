@@ -23,7 +23,7 @@ type Profile {
 }
 
 type Query {
-  post(id: String): Post!
+  post(id: ID): Post!
   posts: [Post!]!
   profiles: [Profile!]!
   users: [User!]!

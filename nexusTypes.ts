@@ -95,7 +95,7 @@ export interface NexusGenArgTypes {
   Query: {
     post: {
       // args
-      id?: string | null // String
+      id?: string | null // ID
     }
   }
 }

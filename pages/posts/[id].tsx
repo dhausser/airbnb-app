@@ -1,27 +1,31 @@
-// import { gql } from '@apollo/client'
-import { PrismaClient } from '@prisma/client'
-import { GetStaticPaths, GetStaticProps } from 'next'
+import { gql, useQuery } from '@apollo/client'
+import { useRouter } from 'next/router'
+
+// import { GetStaticPaths, GetStaticProps } from 'next'
 // import { initializeApollo } from '../../apollo/client'
 // import { PostsQuery } from '../index'
 // import * as PostQueryTypes from './__generated__/PostQuery'
 
-// const PostQuery = gql`
-//   query PostQuery($id: ID!) {
-//     post(id: $id) {
-//       id
-//       title
-//       content
-//       author {
-//         email
-//       }
-//     }
-//   }
-// `
+const PostQuery = gql`
+  query PostQuery($id: ID!) {
+    post(id: $id) {
+      id
+      title
+      content
+      author {
+        email
+      }
+    }
+  }
+`
 
-export const Post = ({ post }): JSX.Element => {
-  // const router = useRouter()
-  // const { id } = router.query
+export const Post = (): JSX.Element => {
+  const router = useRouter()
+  const { id } = router.query
 
+  const { loading, error, data } = useQuery(PostQuery, {
+    variables: { id: id as string },
+  })
   // const { loading, error, data } = useQuery<
   //   PostQueryTypes.PostQuery,
   //   PostQueryTypes.PostQueryVariables
@@ -29,71 +33,57 @@ export const Post = ({ post }): JSX.Element => {
   //   variables: { id: id as string },
   // })
 
-  // if (loading) return <p>Loading...</p>
-  // if (error) return <p>{`${error.name}: ${error.message}`}</p>
+  if (loading) return <p>Loading...</p>
+  if (error) return <p>{`${error.name}: ${error.message}`}</p>
 
   return (
     <div className="grid">
       <div className="card">
-        <h3>{post.title} &rarr;</h3>
-        <p>{post.content}</p>
-        <p>{post.author.email}</p>
+        <h3>{data.post.title} &rarr;</h3>
+        <p>{data.post.content}</p>
+        <p>{data.post.author.email}</p>
       </div>
     </div>
   )
 }
 
 // // This function gets called at build time
-export const getStaticPaths: GetStaticPaths = async () => {
-  // const apolloClient = initializeApollo()
+// export const getStaticPaths: GetStaticPaths = async () => {
+//   const apolloClient = initializeApollo()
 
-  const prisma = new PrismaClient()
+//   // Call an external API endpoint to get posts
+//   // const {
+//   //   data: { posts },
+//   // } = await apolloClient.query({
+//   //   query: PostsQuery,
+//   // })
+//   const posts = [1, 2, 3]
 
-  const posts = await prisma.post.findMany({
-    include: { author: true },
-  })
+//   // Get the paths we want to pre-render based on posts
+//   const paths = posts.map((post) => `/posts/${post.id}`)
 
-  // Call an external API endpoint to get posts
-  // const {
-  //   data: { posts },
-  // } = await apolloClient.query({
-  //   query: PostsQuery,
-  // })
+//   // We'll pre-render only these paths at build time.
+//   // { fallback: false } means other routes should 404.
+//   return { paths, fallback: false }
+// }
 
-  // Get the paths we want to pre-render based on posts
-  const paths = posts.map((post) => `/posts/${post.id}`)
+// // This also gets called at build time
+// export const getStaticProps: GetStaticProps = async ({ params }) => {
+//   const apolloClient: ApolloClient<{}> = initializeApollo()
 
-  // We'll pre-render only these paths at build time.
-  // { fallback: false } means other routes should 404.
-  return { paths, fallback: false }
-}
+//   // await apolloClient.query({
+//   //   query: PostQuery,
+//   //   variables: {
+//   //     id: params.id,
+//   //   },
+//   // })
 
-// This also gets called at build time
-export const getStaticProps: GetStaticProps = async ({ params }) => {
-  // const apolloClient: ApolloClient<{}> = initializeApollo()
-  const prisma = new PrismaClient()
-
-  const post = await prisma.post.findOne({
-    where: { id: Number(params.id) },
-    include: { author: true },
-  })
-
-  // const {
-  //   data: { post },
-  // } = await apolloClient.query({
-  //   query: PostQuery,
-  //   variables: {
-  //     id: params.id,
-  //   },
-  // })
-
-  // Pass post data to the page via props
-  return {
-    props: {
-      // initialApolloState: apolloClient.cache.extract(),
-      post,
-    },
-  }
-}
+//   // Pass post data to the page via props
+//   return {
+//     props: {
+//       initialApolloState: apolloClient.cache.extract(),
+//     },
+//   }
+// }
 
 export default Post

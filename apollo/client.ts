@@ -1,6 +1,6 @@
 import { useMemo } from 'react'
 import { ApolloClient, InMemoryCache } from '@apollo/client'
-import config from '../config.json'
+import { prodEndpoint, devEndpoint } from '../config.json'
 
 let apolloClient
 
@@ -12,10 +12,7 @@ function createIsomorphLink() {
   } else {
     const { HttpLink } = require('@apollo/client/link/http')
     return new HttpLink({
-      uri:
-        process.env.NODE_ENV === 'production'
-          ? config.prodEndpoint
-          : config.devEndpoint,
+      uri: process.env.NODE_ENV === 'production' ? prodEndpoint : devEndpoint,
       credentials: 'same-origin',
     })
   }

@@ -1,9 +1,9 @@
+import { gql, useQuery } from '@apollo/client'
 import Head from 'next/head'
 import Link from 'next/link'
-import { GetStaticProps } from 'next'
-import { PrismaClient } from '@prisma/client'
-import { gql, useQuery, ApolloClient } from '@apollo/client'
-import { initializeApollo } from '../apollo/client'
+
+// import { GetStaticProps } from 'next'
+// import { initializeApollo } from '../apollo/client'
 // import * as PostsQueryTypes from './__generated__/PostsQuery'
 
 export const PostsQuery = gql`
@@ -19,27 +19,14 @@ export const PostsQuery = gql`
   }
 `
 
-const ViewerQuery = gql`
-  query ViewerQuery {
-    viewer {
-      id
-      name
-      status
-    }
-  }
-`
-
-export const Home = ({ posts }): JSX.Element => {
+export const Home = (): JSX.Element => {
+  const { loading, error, data } = useQuery(PostsQuery)
   // const { loading, error, data } = useQuery<PostsQueryTypes.PostsQuery>(
   //   PostsQuery
   // )
 
-  // if (loading) return <p>Loading...</p>
-  // if (error) return <p>{`${error.name}: ${error.message}`}</p>
-
-  const {
-    data: { viewer },
-  } = useQuery(ViewerQuery)
+  if (loading) return <p>Loading...</p>
+  if (error) return <p>{`${error.name}: ${error.message}`}</p>
 
   return (
     <div className="container">
@@ -55,10 +42,8 @@ export const Home = ({ posts }): JSX.Element => {
           Get started by listing your home to swing.
         </p>
 
-        <p>{viewer.name}</p>
-
         <div className="grid">
-          {posts.map((post) => (
+          {data.posts.map((post) => (
             <Link href={`/posts/${post.id}`} key={post.id}>
               <div className="card">
                 <h3>{post.title} &rarr;</h3>
@@ -73,30 +58,18 @@ export const Home = ({ posts }): JSX.Element => {
   )
 }
 
-export const getStaticProps: GetStaticProps = async () => {
-  const prisma = new PrismaClient()
-  const apolloClient: ApolloClient<{}> = initializeApollo()
+// export const getStaticProps: GetStaticProps = async () => {
+//   const apolloClient: ApolloClient<{}> = initializeApollo()
 
-  // const {
-  //   data: { posts },
-  // } = await apolloClient.query({
-  //   query: PostsQuery,
-  // })
+//   // await apolloClient.query({
+//   //   query: PostsQuery,
+//   // })
 
-  const posts = await prisma.post.findMany({
-    include: { author: true },
-  })
-
-  await apolloClient.query({
-    query: ViewerQuery,
-  })
-
-  return {
-    props: {
-      initialApolloState: apolloClient.cache.extract(),
-      posts,
-    },
-  }
-}
+//   return {
+//     props: {
+//       initialApolloState: apolloClient.cache.extract(),
+//     },
+//   }
+// }
 
 export default Home

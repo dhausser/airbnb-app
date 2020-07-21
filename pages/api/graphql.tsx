@@ -8,10 +8,11 @@ const prisma = new PrismaClient()
 
 export interface Context {
   prisma: PrismaClient
+  value: string
 }
 
 export function createContext(): Context {
-  return { prisma }
+  return { prisma, value: 'Hello world!' }
 }
 
 export const schema = makeSchema({
@@ -29,6 +30,8 @@ export const schema = makeSchema({
 const apolloServer = new ApolloServer({
   schema,
   context: createContext(),
+  playground: true,
+  introspection: true,
 })
 
 export const config = {

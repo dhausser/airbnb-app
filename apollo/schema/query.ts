@@ -1,11 +1,11 @@
-import { queryType, stringArg } from '@nexus/schema'
+import { queryType, idArg } from '@nexus/schema'
 
 export const Query = queryType({
   definition(t) {
     t.field('post', {
       type: 'Post',
       args: {
-        id: stringArg(),
+        id: idArg(),
       },
       resolve(_parent, { id }, ctx) {
         return ctx.prisma.post.findOne({
@@ -50,9 +50,6 @@ export const Query = queryType({
     t.field('viewer', {
       type: 'Viewer',
       resolve() {
-        // const user = await ctx.prisma.user.findOne({
-        //   where: { id: 1 },
-        // })
         return { id: '1', name: 'John Smith', status: 'cached' }
       },
     })

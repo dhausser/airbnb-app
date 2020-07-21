@@ -1,9 +1,9 @@
 module.exports = {
   client: {
+    includes: ['./pages/**/*.tsx'],
     service: {
       name: 'airbnb-app',
       localSchemaFile: './schema.graphql',
-      // url: 'http://localhost:3000/api/graphql',
     },
   },
 }
