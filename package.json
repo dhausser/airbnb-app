@@ -64,6 +64,6 @@
     "vercel": "19.1.2"
   },
   "engines": {
-    "node": "14.x"
+    "node": "12.x"
   }
 }
