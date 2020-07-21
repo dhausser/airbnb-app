@@ -1,21 +1,22 @@
-import { gql, ApolloClient } from '@apollo/client'
+// import { gql } from '@apollo/client'
+import { PrismaClient } from '@prisma/client'
 import { GetStaticPaths, GetStaticProps } from 'next'
-import { initializeApollo } from '../../apollo/client'
-import { PostsQuery } from '../index'
+// import { initializeApollo } from '../../apollo/client'
+// import { PostsQuery } from '../index'
 // import * as PostQueryTypes from './__generated__/PostQuery'
 
-const PostQuery = gql`
-  query PostQuery($id: ID!) {
-    post(id: $id) {
-      id
-      title
-      content
-      author {
-        email
-      }
-    }
-  }
-`
+// const PostQuery = gql`
+//   query PostQuery($id: ID!) {
+//     post(id: $id) {
+//       id
+//       title
+//       content
+//       author {
+//         email
+//       }
+//     }
+//   }
+// `
 
 export const Post = ({ post }): JSX.Element => {
   // const router = useRouter()
@@ -44,14 +45,20 @@ export const Post = ({ post }): JSX.Element => {
 
 // // This function gets called at build time
 export const getStaticPaths: GetStaticPaths = async () => {
-  const apolloClient = initializeApollo()
+  // const apolloClient = initializeApollo()
+
+  const prisma = new PrismaClient()
+
+  const posts = await prisma.post.findMany({
+    include: { author: true },
+  })
 
   // Call an external API endpoint to get posts
-  const {
-    data: { posts },
-  } = await apolloClient.query({
-    query: PostsQuery,
-  })
+  // const {
+  //   data: { posts },
+  // } = await apolloClient.query({
+  //   query: PostsQuery,
+  // })
 
   // Get the paths we want to pre-render based on posts
   const paths = posts.map((post) => `/posts/${post.id}`)
@@ -63,19 +70,30 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 // This also gets called at build time
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const apolloClient: ApolloClient<{}> = initializeApollo()
+  // const apolloClient: ApolloClient<{}> = initializeApollo()
+  const prisma = new PrismaClient()
 
-  const {
-    data: { post },
-  } = await apolloClient.query({
-    query: PostQuery,
-    variables: {
-      id: params.id,
-    },
+  const post = await prisma.post.findOne({
+    where: { id: Number(params.id) },
+    include: { author: true },
   })
 
+  // const {
+  //   data: { post },
+  // } = await apolloClient.query({
+  //   query: PostQuery,
+  //   variables: {
+  //     id: params.id,
+  //   },
+  // })
+
   // Pass post data to the page via props
-  return { props: { post } }
+  return {
+    props: {
+      // initialApolloState: apolloClient.cache.extract(),
+      post,
+    },
+  }
 }
 
 export default Post

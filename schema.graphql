@@ -27,6 +27,7 @@ type Query {
   posts: [Post!]!
   profiles: [Profile!]!
   users: [User!]!
+  viewer: Viewer!
 }
 
 type User {
@@ -34,4 +35,10 @@ type User {
   id: ID!
   name: String
   posts: [Post!]
+}
+
+type Viewer {
+  id: ID!
+  name: String!
+  status: String!
 }

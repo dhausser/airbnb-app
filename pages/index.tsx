@@ -1,7 +1,8 @@
 import Head from 'next/head'
 import Link from 'next/link'
 import { GetStaticProps } from 'next'
-import { gql } from '@apollo/client'
+import { PrismaClient } from '@prisma/client'
+import { gql, useQuery, ApolloClient } from '@apollo/client'
 import { initializeApollo } from '../apollo/client'
 // import * as PostsQueryTypes from './__generated__/PostsQuery'
 
@@ -18,6 +19,16 @@ export const PostsQuery = gql`
   }
 `
 
+const ViewerQuery = gql`
+  query ViewerQuery {
+    viewer {
+      id
+      name
+      status
+    }
+  }
+`
+
 export const Home = ({ posts }): JSX.Element => {
   // const { loading, error, data } = useQuery<PostsQueryTypes.PostsQuery>(
   //   PostsQuery
@@ -25,6 +36,10 @@ export const Home = ({ posts }): JSX.Element => {
 
   // if (loading) return <p>Loading...</p>
   // if (error) return <p>{`${error.name}: ${error.message}`}</p>
+
+  const {
+    data: { viewer },
+  } = useQuery(ViewerQuery)
 
   return (
     <div className="container">
@@ -39,6 +54,8 @@ export const Home = ({ posts }): JSX.Element => {
         <p className="description">
           Get started by listing your home to swing.
         </p>
+
+        <p>{viewer.name}</p>
 
         <div className="grid">
           {posts.map((post) => (
@@ -57,17 +74,26 @@ export const Home = ({ posts }): JSX.Element => {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const apolloClient = initializeApollo()
+  const prisma = new PrismaClient()
+  const apolloClient: ApolloClient<{}> = initializeApollo()
 
-  const {
-    data: { posts },
-  } = await apolloClient.query({
-    query: PostsQuery,
+  // const {
+  //   data: { posts },
+  // } = await apolloClient.query({
+  //   query: PostsQuery,
+  // })
+
+  const posts = await prisma.post.findMany({
+    include: { author: true },
+  })
+
+  await apolloClient.query({
+    query: ViewerQuery,
   })
 
   return {
     props: {
-      // initialApolloState: apolloClient.cache.extract(),
+      initialApolloState: apolloClient.cache.extract(),
       posts,
     },
   }

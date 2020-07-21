@@ -46,5 +46,15 @@ export const Query = queryType({
         })
       },
     })
+
+    t.field('viewer', {
+      type: 'Viewer',
+      resolve() {
+        // const user = await ctx.prisma.user.findOne({
+        //   where: { id: 1 },
+        // })
+        return { id: '1', name: 'John Smith', status: 'cached' }
+      },
+    })
   },
 })

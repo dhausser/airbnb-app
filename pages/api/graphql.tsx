@@ -1,8 +1,18 @@
 import { makeSchema } from '@nexus/schema'
-import { createContext } from './context'
+import { PrismaClient } from '@prisma/client'
 import { ApolloServer } from 'apollo-server-micro'
-import * as types from './schema'
+import * as types from '../../apollo/schema'
 import * as path from 'path'
+
+const prisma = new PrismaClient()
+
+export interface Context {
+  prisma: PrismaClient
+}
+
+export function createContext(): Context {
+  return { prisma }
+}
 
 export const schema = makeSchema({
   types,
@@ -11,8 +21,8 @@ export const schema = makeSchema({
     sources: [{ source: '.prisma/client', alias: 'PrismaClient' }],
   },
   outputs: {
-    schema: path.join(process.cwd(), 'pages', 'api', 'schema.graphql'),
-    typegen: path.join(process.cwd(), 'pages', 'api', 'nexusTypes.ts'),
+    schema: path.join(process.cwd(), 'schema.graphql'),
+    typegen: path.join(process.cwd(), 'nexusTypes.ts'),
   },
 })
 
@@ -27,4 +37,4 @@ export const config = {
   },
 }
 
-export default apolloServer.createHandler({ path: '/api' })
+export default apolloServer.createHandler({ path: '/api/graphql' })
