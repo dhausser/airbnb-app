@@ -1,0 +1,4 @@
+{
+  "devEndpoint": "http://localhost:3000/api",
+  "prodEndpoint": "https://airbnb-app-jjn9sbh60.vercel.app/api"
+}

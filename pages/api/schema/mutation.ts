@@ -15,7 +15,7 @@ export const Mutation = mutationType({
             title: args.title,
             content: args.content,
             author: {
-              connect: { email: 'alice@prisma.io' },
+              connect: { email: args.authorEmail },
             },
           },
         })

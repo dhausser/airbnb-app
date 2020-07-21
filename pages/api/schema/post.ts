@@ -17,6 +17,6 @@ export const Post = objectType({
           .author()
       },
     })
-    t.boolean('published')
+    // t.boolean('published')
   },
 })

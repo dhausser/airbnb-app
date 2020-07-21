@@ -11,13 +11,13 @@ type Post {
   author: User
   content: String
   id: ID!
-  published: Boolean!
   title: String!
 }
 
 type Profile {
   bio: String
   id: ID!
+  published: Boolean!
   user: User
   userId: String
 }
@@ -34,5 +34,4 @@ type User {
   id: ID!
   name: String
   posts: [Post!]
-  profile: Profile
 }

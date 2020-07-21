@@ -1,9 +1,13 @@
 import { useMemo } from 'react'
 import { ApolloClient, InMemoryCache, HttpLink } from '@apollo/client'
+import config from '../config.json'
 
 let apolloClient
 
 function createIsomorphLink() {
+  /**
+   * TODO: fix schema loading issue
+   */
   // if (typeof window === 'undefined') {
   //   const { SchemaLink } = require('@apollo/client/link/schema')
   //   const { schema } = require('./../pages/api/graphql')
@@ -11,7 +15,10 @@ function createIsomorphLink() {
   // } else {
   //   const { HttpLink } = require('@apollo/client/link/http')
   return new HttpLink({
-    uri: 'http://localhost:3000/api',
+    uri:
+      process.env.NODE_ENV === 'production'
+        ? config.prodEndpoint
+        : config.devEndpoint,
     credentials: 'same-origin',
   })
   // }

@@ -6,6 +6,7 @@ export const Profile = objectType({
     t.id('id')
     t.string('bio', { nullable: true })
     t.string('userId', { nullable: true })
+    t.boolean('published')
     t.field('user', {
       type: 'User',
       nullable: true,

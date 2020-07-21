@@ -39,13 +39,13 @@ export interface NexusGenFieldTypes {
     author: NexusGenRootTypes['User'] | null // User
     content: string | null // String
     id: string // ID!
-    published: boolean // Boolean!
     title: string // String!
   }
   Profile: {
     // field return type
     bio: string | null // String
     id: string // ID!
+    published: boolean // Boolean!
     user: NexusGenRootTypes['User'] | null // User
     userId: string | null // String
   }
@@ -62,7 +62,6 @@ export interface NexusGenFieldTypes {
     id: string // ID!
     name: string | null // String
     posts: NexusGenRootTypes['Post'][] | null // [Post!]
-    profile: NexusGenRootTypes['Profile'] | null // Profile
   }
 }
 
