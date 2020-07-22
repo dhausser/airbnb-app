@@ -21,8 +21,8 @@ export const User = objectType({
     // t.field('profile', {
     //   type: 'Profile',
     //   nullable: true,
-    //   resolve(parent, _args, ctx) {
-    //     return ctx.prisma.profile.findOne({
+    //   resolve(parent, _args, _ctx) {
+    //     return prisma.profile.findOne({
     //       where: { userId: Number(parent.id) },
     //     })
     //   },

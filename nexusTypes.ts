@@ -19,12 +19,6 @@ export interface NexusGenRootTypes {
   Profile: PrismaClient.Profile
   Query: {}
   User: PrismaClient.User
-  Viewer: {
-    // root type
-    id: string // ID!
-    name: string // String!
-    status: string // String!
-  }
   String: string
   Int: number
   Float: number
@@ -61,7 +55,6 @@ export interface NexusGenFieldTypes {
     posts: NexusGenRootTypes['Post'][] // [Post!]!
     profiles: NexusGenRootTypes['Profile'][] // [Profile!]!
     users: NexusGenRootTypes['User'][] // [User!]!
-    viewer: NexusGenRootTypes['Viewer'] // Viewer!
   }
   User: {
     // field return type
@@ -69,12 +62,6 @@ export interface NexusGenFieldTypes {
     id: string // ID!
     name: string | null // String
     posts: NexusGenRootTypes['Post'][] | null // [Post!]
-  }
-  Viewer: {
-    // field return type
-    id: string // ID!
-    name: string // String!
-    status: string // String!
   }
 }
 
@@ -110,7 +97,6 @@ export type NexusGenObjectNames =
   | 'Profile'
   | 'Query'
   | 'User'
-  | 'Viewer'
 
 export type NexusGenInputNames = never
 
