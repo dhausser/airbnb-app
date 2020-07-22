@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { GetStaticProps } from 'next'
 import { useQuery, gql, ApolloClient } from '@apollo/client'
 import { initializeApollo } from '../apollo/client'
-import * as PostsQueryTypes from './__generated__/PostsQuery'
+// import * as PostsQueryTypes from './__generated__/PostsQuery'
 
 export const PostsQuery = gql`
   query PostsQuery {
@@ -19,9 +19,8 @@ export const PostsQuery = gql`
 `
 
 export const Home = (): JSX.Element => {
-  const { loading, error, data } = useQuery<PostsQueryTypes.PostsQuery>(
-    PostsQuery
-  )
+  // const { loading, error, data } = useQuery<PostsQueryTypes.PostsQuery>(
+  const { loading, error, data } = useQuery(PostsQuery)
 
   return (
     <div className="container">
