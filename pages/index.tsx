@@ -18,23 +18,10 @@ export const PostsQuery = gql`
   }
 `
 
-// const ViewerQuery = gql`
-//   query ViewerQuery {
-//     viewer {
-//       id
-//       name
-//       status
-//     }
-//   }
-// `
-
 export const Home = (): JSX.Element => {
   const { loading, error, data } = useQuery<PostsQueryTypes.PostsQuery>(
     PostsQuery
   )
-
-  // if (loading) return <p>Loading...</p>
-  if (error) return <p>{`${error.name}: ${error.message}`}</p>
 
   return (
     <div className="container">
