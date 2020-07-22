@@ -1,10 +1,10 @@
 import { gql, useQuery } from '@apollo/client'
 import { useRouter } from 'next/router'
+import * as PostQueryTypes from './__generated__/PostQuery'
 
 // import { GetStaticPaths, GetStaticProps } from 'next'
 // import { initializeApollo } from '../../apollo/client'
 // import { PostsQuery } from '../index'
-// import * as PostQueryTypes from './__generated__/PostQuery'
 
 const PostQuery = gql`
   query PostQuery($id: ID!) {
@@ -23,15 +23,12 @@ export const Post = (): JSX.Element => {
   const router = useRouter()
   const { id } = router.query
 
-  const { loading, error, data } = useQuery(PostQuery, {
+  const { loading, error, data } = useQuery<
+    PostQueryTypes.PostQuery,
+    PostQueryTypes.PostQueryVariables
+  >(PostQuery, {
     variables: { id: id as string },
   })
-  // const { loading, error, data } = useQuery<
-  //   PostQueryTypes.PostQuery,
-  //   PostQueryTypes.PostQueryVariables
-  // >(PostQuery, {
-  //   variables: { id: id as string },
-  // })
 
   if (loading) return <p>Loading...</p>
   if (error) return <p>{`${error.name}: ${error.message}`}</p>

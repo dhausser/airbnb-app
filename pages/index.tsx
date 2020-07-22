@@ -1,10 +1,10 @@
 import { gql, useQuery } from '@apollo/client'
 import Head from 'next/head'
 import Link from 'next/link'
+import * as PostsQueryTypes from './__generated__/PostsQuery'
 
 // import { GetStaticProps } from 'next'
 // import { initializeApollo } from '../apollo/client'
-// import * as PostsQueryTypes from './__generated__/PostsQuery'
 
 export const PostsQuery = gql`
   query PostsQuery {
@@ -20,10 +20,9 @@ export const PostsQuery = gql`
 `
 
 export const Home = (): JSX.Element => {
-  const { loading, error, data } = useQuery(PostsQuery)
-  // const { loading, error, data } = useQuery<PostsQueryTypes.PostsQuery>(
-  //   PostsQuery
-  // )
+  const { loading, error, data } = useQuery<PostsQueryTypes.PostsQuery>(
+    PostsQuery
+  )
 
   if (loading) return <p>Loading...</p>
   if (error) return <p>{`${error.name}: ${error.message}`}</p>
