@@ -1,6 +1,6 @@
-import { makeSchema } from '@nexus/schema'
 import { PrismaClient } from '@prisma/client'
 import { ApolloServer } from 'apollo-server-micro'
+import { makeSchema } from '@nexus/schema'
 import * as types from '../../apollo/schema'
 import * as path from 'path'
 
@@ -8,11 +8,10 @@ const prisma = new PrismaClient()
 
 export interface Context {
   prisma: PrismaClient
-  value: string
 }
 
 export function createContext(): Context {
-  return { prisma, value: 'Hello world!' }
+  return { prisma }
 }
 
 export const schema = makeSchema({

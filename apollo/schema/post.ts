@@ -1,4 +1,7 @@
 import { objectType } from '@nexus/schema'
+import { PrismaClient } from '@prisma/client'
+
+const prisma = new PrismaClient()
 
 export const Post = objectType({
   name: 'Post',
@@ -9,8 +12,8 @@ export const Post = objectType({
     t.field('author', {
       type: 'User',
       nullable: true,
-      resolve(parent, _args, ctx) {
-        return ctx.prisma.post
+      resolve(parent, _args, _ctx) {
+        return prisma.post
           .findOne({
             where: { id: parent.id },
           })

@@ -1,10 +1,9 @@
-import { gql, useQuery } from '@apollo/client'
 import Head from 'next/head'
 import Link from 'next/link'
+import { GetStaticProps } from 'next'
+import { useQuery, gql, ApolloClient } from '@apollo/client'
+import { initializeApollo } from '../apollo/client'
 import * as PostsQueryTypes from './__generated__/PostsQuery'
-
-// import { GetStaticProps } from 'next'
-// import { initializeApollo } from '../apollo/client'
 
 export const PostsQuery = gql`
   query PostsQuery {
@@ -19,12 +18,22 @@ export const PostsQuery = gql`
   }
 `
 
+// const ViewerQuery = gql`
+//   query ViewerQuery {
+//     viewer {
+//       id
+//       name
+//       status
+//     }
+//   }
+// `
+
 export const Home = (): JSX.Element => {
   const { loading, error, data } = useQuery<PostsQueryTypes.PostsQuery>(
     PostsQuery
   )
 
-  if (loading) return <p>Loading...</p>
+  // if (loading) return <p>Loading...</p>
   if (error) return <p>{`${error.name}: ${error.message}`}</p>
 
   return (
@@ -42,33 +51,39 @@ export const Home = (): JSX.Element => {
         </p>
 
         <div className="grid">
-          {data.posts.map((post) => (
-            <Link href={`/posts/${post.id}`} key={post.id}>
-              <div className="card">
-                <h3>{post.title} &rarr;</h3>
-                <p>{post.content}</p>
-                <p>{post.author.email}</p>
-              </div>
-            </Link>
-          ))}
+          {loading ? (
+            <p>Loading...</p>
+          ) : error ? (
+            <p>{`${error.name}: ${error.message}`}</p>
+          ) : (
+            data.posts.map((post) => (
+              <Link href={`/posts/${post.id}`} key={post.id}>
+                <div className="card">
+                  <h3>{post.title} &rarr;</h3>
+                  <p>{post.content}</p>
+                  <p>{post.author.email}</p>
+                </div>
+              </Link>
+            ))
+          )}
         </div>
       </main>
     </div>
   )
 }
 
-// export const getStaticProps: GetStaticProps = async () => {
-//   const apolloClient: ApolloClient<{}> = initializeApollo()
+export const getStaticProps: GetStaticProps = async () => {
+  const apolloClient: ApolloClient<{}> = initializeApollo()
 
-//   // await apolloClient.query({
-//   //   query: PostsQuery,
-//   // })
+  await apolloClient.query({
+    query: PostsQuery,
+  })
 
-//   return {
-//     props: {
-//       initialApolloState: apolloClient.cache.extract(),
-//     },
-//   }
-// }
+  return {
+    props: {
+      initialApolloState: apolloClient.cache.extract(),
+    },
+  }
+}
 
 export default Home
