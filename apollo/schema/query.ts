@@ -1,7 +1,4 @@
 import { queryType, idArg } from '@nexus/schema'
-import { PrismaClient } from '@prisma/client'
-
-const prisma = new PrismaClient()
 
 export const Query = queryType({
   definition(t) {
@@ -10,8 +7,8 @@ export const Query = queryType({
       args: {
         id: idArg(),
       },
-      resolve(_parent, { id }, _ctx) {
-        return prisma.post.findOne({
+      resolve(_parent, { id }, ctx) {
+        return ctx.prisma.post.findOne({
           where: { id: Number(id) },
           include: { author: true },
         })
@@ -20,8 +17,8 @@ export const Query = queryType({
 
     t.list.field('posts', {
       type: 'Post',
-      resolve(_parent, _args, _ctx) {
-        return prisma.post.findMany({
+      resolve(_parent, _args, ctx) {
+        return ctx.prisma.post.findMany({
           include: { author: true },
         })
       },
@@ -29,8 +26,8 @@ export const Query = queryType({
 
     t.list.field('users', {
       type: 'User',
-      resolve(_parent, _args, _ctx) {
-        return prisma.user.findMany({
+      resolve(_parent, _args, ctx) {
+        return ctx.prisma.user.findMany({
           include: {
             posts: true,
             profile: true,
@@ -41,8 +38,8 @@ export const Query = queryType({
 
     t.list.field('profiles', {
       type: 'Profile',
-      resolve(_parent, _args, _ctx) {
-        return prisma.profile.findMany({
+      resolve(_parent, _args, ctx) {
+        return ctx.prisma.profile.findMany({
           include: {
             user: true,
           },

@@ -21,8 +21,8 @@ export const schema = makeSchema({
     sources: [{ source: '.prisma/client', alias: 'PrismaClient' }],
   },
   outputs: {
-    schema: path.join(process.cwd(), 'schema.graphql'),
-    typegen: path.join(process.cwd(), 'nexusTypes.ts'),
+    schema: path.join(process.cwd(), '__generated__', 'schema.graphql'),
+    typegen: path.join(process.cwd(), '__generated__', 'nexusTypes.ts'),
   },
 })
 

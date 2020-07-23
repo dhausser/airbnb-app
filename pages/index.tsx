@@ -1,9 +1,11 @@
 import Head from 'next/head'
 import Link from 'next/link'
-import { GetStaticProps } from 'next'
-import { useQuery, gql, ApolloClient } from '@apollo/client'
-import { initializeApollo } from '../apollo/client'
-// import * as PostsQueryTypes from './__generated__/PostsQuery'
+import { useQuery, gql } from '@apollo/client'
+import * as PostsQueryTypes from '../__generated__/PostsQuery'
+
+// import { GetStaticProps } from 'next'
+// import { ApolloClient } from '@apollo/client'
+// import { initializeApollo } from '../apollo/client'
 
 export const PostsQuery = gql`
   query PostsQuery {
@@ -19,8 +21,9 @@ export const PostsQuery = gql`
 `
 
 export const Home = (): JSX.Element => {
-  // const { loading, error, data } = useQuery<PostsQueryTypes.PostsQuery>(
-  const { loading, error, data } = useQuery(PostsQuery)
+  const { loading, error, data } = useQuery<PostsQueryTypes.PostsQuery>(
+    PostsQuery
+  )
 
   return (
     <div className="container">
@@ -46,7 +49,7 @@ export const Home = (): JSX.Element => {
               <Link href={`/posts/${post.id}`} key={post.id}>
                 <div className="card">
                   <h3>{post.title} &rarr;</h3>
-                  <p>{post.content}</p>
+                  <p>{post.content.slice(0, 30)}...</p>
                   <p>{post.author.email}</p>
                 </div>
               </Link>
@@ -58,18 +61,18 @@ export const Home = (): JSX.Element => {
   )
 }
 
-export const getStaticProps: GetStaticProps = async () => {
-  const apolloClient: ApolloClient<{}> = initializeApollo()
+// export const getStaticProps: GetStaticProps = async () => {
+//   const apolloClient: ApolloClient<{}> = initializeApollo()
 
-  await apolloClient.query({
-    query: PostsQuery,
-  })
+//   await apolloClient.query({
+//     query: PostsQuery,
+//   })
 
-  return {
-    props: {
-      initialApolloState: apolloClient.cache.extract(),
-    },
-  }
-}
+//   return {
+//     props: {
+//       initialApolloState: apolloClient.cache.extract(),
+//     },
+//   }
+// }
 
 export default Home

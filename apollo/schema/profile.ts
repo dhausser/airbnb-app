@@ -1,7 +1,4 @@
 import { objectType } from '@nexus/schema'
-import { PrismaClient } from '@prisma/client'
-
-const prisma = new PrismaClient()
 
 export const Profile = objectType({
   name: 'Profile',
@@ -13,8 +10,8 @@ export const Profile = objectType({
     t.field('user', {
       type: 'User',
       nullable: true,
-      resolve(parent, _args, _ctx) {
-        return prisma.profile
+      resolve(parent, _args, ctx) {
+        return ctx.prisma.profile
           .findOne({
             where: { id: parent.id },
           })

@@ -1,7 +1,4 @@
 import { mutationType, stringArg } from '@nexus/schema'
-import { PrismaClient } from '@prisma/client'
-
-const prisma = new PrismaClient()
 
 export const Mutation = mutationType({
   definition(t) {
@@ -12,8 +9,8 @@ export const Mutation = mutationType({
         content: stringArg(),
         authorEmail: stringArg(),
       },
-      resolve(_parent, args, _ctx) {
-        return prisma.post.create({
+      resolve(_parent, args, ctx) {
+        return ctx.prisma.post.create({
           data: {
             title: args.title,
             content: args.content,
@@ -31,8 +28,8 @@ export const Mutation = mutationType({
         name: stringArg(),
         email: stringArg({ nullable: false }),
       },
-      resolve(_parent, { email, name }, _ctx) {
-        return prisma.user.create({
+      resolve(_parent, { email, name }, ctx) {
+        return ctx.prisma.user.create({
           data: { email, name },
         })
       },

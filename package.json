@@ -12,10 +12,11 @@
     "lint": "eslint . --ext ts --ext tsx --ext js",
     "test": "jest",
     "test-all": "yarn lint && yarn type-check && yarn test",
-    "codegen": "apollo client:codegen --target typescript --watch",
+    "codegen": "apollo client:codegen __generated__ --outputFlat --target typescript",
+    "codegen:watch": "apollo client:codegen __generated__ --outputFlat --target typescript --watch",
     "generate:prisma": "prisma generate",
     "generate:nexus": "ts-node --transpile-only -P nexus.tsconfig.json apollo/schema",
-    "generate": "yarn run generate:prisma && yarn run generate:nexus",
+    "generate": "yarn run generate:prisma && yarn run generate:nexus && yarn run codegen",
     "postinstall": "yarn run generate"
   },
   "husky": {
@@ -65,5 +66,8 @@
   "peerDependencies": {
     "@babel/core": "^7.0.0",
     "subscriptions-transport-ws": "^0.9.0"
+  },
+  "resolutions": {
+    "graphql": "14.7.0"
   }
 }
