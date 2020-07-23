@@ -5,19 +5,18 @@
   "version": "1.0.0",
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "nexus build && next build",
     "start": "next start",
     "type-check": "tsc --pretty --noEmit",
     "format": "prettier --write \"**/*.{js,ts,tsx}\"",
     "lint": "eslint . --ext ts --ext tsx --ext js",
     "test": "jest",
+    "test:nexus": "nexus build",
     "test-all": "yarn lint && yarn type-check && yarn test",
     "codegen": "apollo client:codegen __generated__ --outputFlat --target typescript",
     "codegen:watch": "apollo client:codegen __generated__ --outputFlat --target typescript --watch",
-    "generate:prisma": "prisma generate",
-    "generate:nexus": "ts-node --transpile-only -P nexus.tsconfig.json apollo/schema",
-    "generate": "yarn run generate:prisma && yarn run generate:nexus && yarn run codegen",
-    "postinstall": "yarn run generate"
+    "nexus:reflection": "nexus dev --reflection --entrypoint pages/api/graphql.ts",
+    "nexus:check": "nexus build --entrypoint pages/api/graphql.ts"
   },
   "husky": {
     "hooks": {
@@ -34,17 +33,16 @@
   "dependencies": {
     "@apollo/client": "^3.0.2",
     "@babel/core": "^7.0.0",
-    "@nexus/schema": "^0.14.0",
-    "@prisma/client": "^2.3.0",
-    "apollo-server-micro": "^2.16.0",
     "graphql": "^14.7.0",
     "next": "latest",
+    "nexus": "^0.25.0",
+    "nexus-plugin-prisma": "^0.16.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "subscriptions-transport-ws": "^0.9.0"
   },
   "devDependencies": {
-    "@prisma/cli": "2.3.0",
+    "@prisma-labs/prettier-config": "^0.1.0",
     "@testing-library/react": "^10.0.1",
     "@types/jest": "^25.1.4",
     "@types/node": "^13.9.5",
@@ -71,5 +69,6 @@
   },
   "resolutions": {
     "graphql": "14.7.0"
-  }
+  },
+  "prettier": "@prisma-labs/prettier-config"
 }

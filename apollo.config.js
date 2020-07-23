@@ -3,7 +3,7 @@ module.exports = {
     includes: ['./pages/**/*.tsx'],
     service: {
       name: 'airbnb-app',
-      localSchemaFile: './__generated__/schema.graphql',
+      localSchemaFile: 'api.graphql',
     },
   },
 }

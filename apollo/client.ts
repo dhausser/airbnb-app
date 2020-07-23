@@ -5,17 +5,17 @@ import { prodEndpoint, devEndpoint } from '../config.json'
 let apolloClient
 
 function createIsomorphLink() {
-  if (typeof window === 'undefined') {
-    const { SchemaLink } = require('@apollo/client/link/schema')
-    const { schema } = require('./../pages/api/graphql')
-    return new SchemaLink({ schema })
-  } else {
-    const { HttpLink } = require('@apollo/client/link/http')
-    return new HttpLink({
-      uri: process.env.NODE_ENV === 'production' ? prodEndpoint : devEndpoint,
-      credentials: 'same-origin',
-    })
-  }
+  //   if (typeof window === 'undefined') {
+  //     const { SchemaLink } = require('@apollo/client/link/schema')
+  //     const { schema } = require('./../pages/api/graphql')
+  //     return new SchemaLink({ schema })
+  //   } else {
+  const { HttpLink } = require('@apollo/client/link/http')
+  return new HttpLink({
+    uri: process.env.NODE_ENV === 'production' ? prodEndpoint : devEndpoint,
+    credentials: 'same-origin',
+  })
+  // }
 }
 
 function createApolloClient() {
