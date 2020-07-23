@@ -25,12 +25,12 @@ export const Post = (): JSX.Element => {
   const router = useRouter()
   const { id } = router.query
 
-  const { loading, error, data } = useQuery<
-    PostQueryTypes.PostQuery,
-    PostQueryTypes.PostQueryVariables
-  >(PostQuery, {
-    variables: { id: id as string },
-  })
+  const { loading, error, data } = useQuery<PostQueryTypes.PostQuery, PostQueryTypes.PostQueryVariables>(
+    PostQuery,
+    {
+      variables: { id: id as string },
+    }
+  )
 
   return (
     <div className="grid">

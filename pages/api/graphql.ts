@@ -2,9 +2,12 @@ if (process.env.NODE_ENV === 'development') require('nexus').default.reset()
 
 const app = require('nexus').default
 
-// Require your nexus modules here.
-// Do not write them inline, since the Nexus API is typed `any` because of `require` import.
-// require('...')
+require('../../graphql/mutation')
+require('../../graphql/post')
+require('../../graphql/profile')
+require('../../graphql/query')
+require('../../graphql/schema')
+require('../../graphql/user')
 
 app.assemble()
 

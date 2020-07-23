@@ -1,39 +1,27 @@
 import Head from 'next/head'
 import Link from 'next/link'
 import { useQuery, gql } from '@apollo/client'
-// import * as PostsQueryTypes from '../__generated__/PostsQuery'
+import * as PostsQueryTypes from '../__generated__/PostsQuery'
 
 // import { GetStaticProps } from 'next'
 // import { ApolloClient } from '@apollo/client'
 // import { initializeApollo } from '../apollo/client'
 
-// export const PostsQuery = gql`
-//   query PostsQuery {
-//     posts {
-//       id
-//       title
-//       content
-//       author {
-//         email
-//       }
-//     }
-//   }
-// `
-
-const DraftsQuery = gql`
-  query DraftsQuery {
-    drafts {
+export const PostsQuery = gql`
+  query PostsQuery {
+    posts {
       id
-      body
       title
-      published
+      content
+      author {
+        email
+      }
     }
   }
 `
 
 export const Home = (): JSX.Element => {
-  // const { loading, error, data } = useQuery<PostsQueryTypes.PostsQuery>(DraftsQuery)
-  const { loading, error, data } = useQuery(DraftsQuery)
+  const { loading, error, data } = useQuery<PostsQueryTypes.PostsQuery>(PostsQuery)
 
   return (
     <div className="container">
@@ -57,16 +45,12 @@ export const Home = (): JSX.Element => {
               <p>{`${error.name}: ${error.message}`}</p>
             </div>
           ) : (
-            data.drafts.map((draft) => (
-              <Link href={`/posts/${draft.id}`} key={draft.id}>
+            data.posts.map((post) => (
+              <Link href={`/posts/${post.id}`} key={post.id}>
                 <div className="card">
-                  <p>{draft.id}</p>
-                  <p>{draft.body}</p>
-                  <p>{draft.title}</p>
-                  <p>{draft.published}</p>
-                  {/* <h3>{post.title} &rarr;</h3>
+                  <h3>{post.title} &rarr;</h3>
                   <p>{post.content.slice(0, 30)}...</p>
-                  <p>{post.author.email}</p> */}
+                  <p>{post.author.email}</p>
                 </div>
               </Link>
             ))

@@ -14,13 +14,37 @@ The `JSON` scalar type represents JSON objects as specified by [ECMA-404](http:/
 """
 scalar Json
 
+type Mutation {
+  createDraft(authorEmail: String, content: String, title: String!): Post
+  createProfile(bio: String, userEmail: String): Profile
+  signupUser(email: String!, name: String): User
+}
+
 type Post {
-  body: String
-  id: Int
+  author: User
+  content: String
+  id: ID
   published: Boolean
   title: String
 }
 
+type Profile {
+  bio: String
+  id: ID
+  user: User
+}
+
 type Query {
-  drafts: [Post!]
+  post(id: ID): Post
+  posts: [Post!]
+  profiles: [Profile!]
+  users: [User!]
+}
+
+type User {
+  email: String
+  id: ID
+  name: String
+  posts: [Post!]
+  profile: Profile
 }

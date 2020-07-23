@@ -1,8 +1,7 @@
 {
   "name": "airbnb-app",
   "author": "dhausser",
-  "license": "MIT",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "scripts": {
     "dev": "next dev",
     "build": "nexus build && next build",
