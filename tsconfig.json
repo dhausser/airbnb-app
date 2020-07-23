@@ -17,6 +17,6 @@
     "typeRoots": ["node_modules/@types", "types"],
     "plugins": [{ "name": "nexus/typescript-language-service" }]
   },
-  "exclude": ["node_modules"],
+  "exclude": ["node_modules", "__generated__"],
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".", "types.d.ts"]
 }
