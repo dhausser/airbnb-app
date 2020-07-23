@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useQuery, gql } from '@apollo/client'
 import * as PostQueryTypes from '../../__generated__/PostQuery'
@@ -39,11 +40,13 @@ export const Post = (): JSX.Element => {
         ) : error ? (
           <p>{`${error.name}: ${error.message}`}</p>
         ) : (
-          <>
-            <h3>{data.post.title} &rarr;</h3>
-            <p>{data.post.content}</p>
-            <p>{data.post.author.email}</p>
-          </>
+          <Link href="/">
+            <div>
+              <h3>{data.post.title} &rarr;</h3>
+              <p>{data.post.content}</p>
+              <p>{data.post.author.email}</p>
+            </div>
+          </Link>
         )}
       </div>
     </div>

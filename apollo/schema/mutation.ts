@@ -34,5 +34,17 @@ export const Mutation = mutationType({
         })
       },
     })
+
+    t.field('createProfile', {
+      type: 'Profile',
+      args: {
+        bio: stringArg(),
+        userEmail: stringArg(),
+      },
+      resolve(_parent, { bio, userEmail }, _ctx) {
+        console.log({ bio, userEmail })
+        return {}
+      },
+    })
   },
 })

@@ -32,6 +32,7 @@ export interface NexusGenFieldTypes {
   Mutation: {
     // field return type
     createDraft: NexusGenRootTypes['Post'] // Post!
+    createProfile: NexusGenRootTypes['Profile'] // Profile!
     signupUser: NexusGenRootTypes['User'] // User!
   }
   Post: {
@@ -39,15 +40,14 @@ export interface NexusGenFieldTypes {
     author: NexusGenRootTypes['User'] | null // User
     content: string | null // String
     id: string // ID!
+    published: boolean // Boolean!
     title: string // String!
   }
   Profile: {
     // field return type
     bio: string | null // String
     id: string // ID!
-    published: boolean // Boolean!
     user: NexusGenRootTypes['User'] | null // User
-    userId: string | null // String
   }
   Query: {
     // field return type
@@ -62,6 +62,7 @@ export interface NexusGenFieldTypes {
     id: string // ID!
     name: string | null // String
     posts: NexusGenRootTypes['Post'][] | null // [Post!]
+    profile: NexusGenRootTypes['Profile'] | null // Profile
   }
 }
 
@@ -72,6 +73,11 @@ export interface NexusGenArgTypes {
       authorEmail?: string | null // String
       content?: string | null // String
       title: string // String!
+    }
+    createProfile: {
+      // args
+      bio?: string | null // String
+      userEmail?: string | null // String
     }
     signupUser: {
       // args

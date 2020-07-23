@@ -41,9 +41,13 @@ export const Home = (): JSX.Element => {
 
         <div className="grid">
           {loading ? (
-            <p>Loading...</p>
+            <div className="card">
+              <p>Loading...</p>
+            </div>
           ) : error ? (
-            <p>{`${error.name}: ${error.message}`}</p>
+            <div className="card">
+              <p>{`${error.name}: ${error.message}`}</p>
+            </div>
           ) : (
             data.posts.map((post) => (
               <Link href={`/posts/${post.id}`} key={post.id}>

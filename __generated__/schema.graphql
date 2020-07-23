@@ -4,6 +4,7 @@
 
 type Mutation {
   createDraft(authorEmail: String, content: String, title: String!): Post!
+  createProfile(bio: String, userEmail: String): Profile!
   signupUser(email: String!, name: String): User!
 }
 
@@ -11,15 +12,14 @@ type Post {
   author: User
   content: String
   id: ID!
+  published: Boolean!
   title: String!
 }
 
 type Profile {
   bio: String
   id: ID!
-  published: Boolean!
   user: User
-  userId: String
 }
 
 type Query {
@@ -34,4 +34,5 @@ type User {
   id: ID!
   name: String
   posts: [Post!]
+  profile: Profile
 }
