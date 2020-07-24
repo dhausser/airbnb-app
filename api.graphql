@@ -17,6 +17,7 @@ scalar Json
 type Mutation {
   createDraft(authorEmail: String, content: String, title: String!): Post
   createProfile(bio: String, userEmail: String): Profile
+  deletePosts: Int
   signupUser(email: String!, name: String): User
 }
 

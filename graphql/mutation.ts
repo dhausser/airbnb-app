@@ -52,5 +52,12 @@ schema.mutationType({
         })
       },
     })
+
+    t.field('deletePosts', {
+      type: 'Int',
+      async resolve(_parent, _args, ctx) {
+        return (await ctx.db.post.deleteMany({})).count
+      },
+    })
   },
 })
