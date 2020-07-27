@@ -10,14 +10,18 @@ interface Props {
 
 export const Posts: React.FC<Props> = ({ loading, error, data }) => {
   return (
-    <div className="card">
+    <>
       {loading ? (
-        <p>Loading...</p>
+        <div className="card">
+          <p>Loading...</p>
+        </div>
       ) : error ? (
-        <p>{`${error.name}: ${error.message}`}</p>
+        <div className="card">
+          <p>{`${error.name}: ${error.message}`}</p>
+        </div>
       ) : (
         data.posts.map((post) => <PostCard key={post.id} post={post} />)
       )}
-    </div>
+    </>
   )
 }

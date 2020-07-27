@@ -30,9 +30,8 @@ const CreateDraftMutation = gql`
 export const PostForm: React.FC<Props> = ({ initial }) => {
   const client = useApolloClient()
   const [createDraft] = useMutation(CreateDraftMutation)
-  const { inputs, handleChange } = useForm()
-
-  const [errorMsg, setErrorMsg] = useState(initial)
+  const [errorMsg, setErrorMsg] = useState()
+  const { inputs, handleChange } = useForm(initial)
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>): Promise<void> {
     event.preventDefault()
