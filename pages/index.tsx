@@ -1,32 +1,15 @@
-import { useState, FormEvent } from 'react'
 import Head from 'next/head'
-import Link from 'next/link'
 import { GetStaticProps } from 'next'
-import { ApolloClient } from '@apollo/client'
+import { useQuery, useMutation, useApolloClient, gql, ApolloClient } from '@apollo/client'
 
 import { initializeApollo } from '../apollo/client'
-import { useQuery, useMutation, useApolloClient, gql } from '@apollo/client'
-import { getErrorMessage } from '../lib/form'
-import useForm from '../lib/use-form'
-import Field from '../components/field'
+import { Posts } from '../components/posts'
+import { PostForm } from '../components/post-form'
 import * as PostsQueryTypes from '../__generated__/PostsQuery'
 
 export const PostsQuery = gql`
   query PostsQuery {
     posts {
-      id
-      title
-      content
-      author {
-        email
-      }
-    }
-  }
-`
-
-const CreateDraftMutation = gql`
-  mutation CreateDraft($title: String!, $content: String!, $authorEmail: String!) {
-    createDraft(title: $title, content: $content, authorEmail: $authorEmail) {
       id
       title
       content
@@ -45,27 +28,9 @@ const DeletePostsMutation = gql`
 
 export const Home = (): JSX.Element => {
   const client = useApolloClient()
-  const [createDraft] = useMutation(CreateDraftMutation)
   const [deletePosts] = useMutation(DeletePostsMutation)
   const { loading, error, data } = useQuery<PostsQueryTypes.PostsQuery>(PostsQuery)
-  const { inputs, handleChange } = useForm({ title: 'test', content: 'test', authorEmail: 'davy@prisma.io' })
-
-  const [errorMsg, setErrorMsg] = useState()
-
-  async function handleSubmit(event: FormEvent<HTMLFormElement>): Promise<void> {
-    event.preventDefault()
-    const { title, content, authorEmail } = inputs
-    try {
-      const { data } = await createDraft({
-        variables: { title, content, authorEmail },
-      })
-      if (data.createDraft.id) {
-        await client.resetStore()
-      }
-    } catch (error) {
-      setErrorMsg(getErrorMessage(error))
-    }
-  }
+  const initial = { title: 'test', content: 'test', authorEmail: 'davy@prisma.io' }
 
   async function handleDelete() {
     const { data } = await deletePosts()
@@ -89,52 +54,8 @@ export const Home = (): JSX.Element => {
         <button onClick={handleDelete}>Delete all</button>
 
         <div className="grid">
-          {loading ? (
-            <div className="card">
-              <p>Loading...</p>
-            </div>
-          ) : error ? (
-            <div className="card">
-              <p>{`${error.name}: ${error.message}`}</p>
-            </div>
-          ) : (
-            data.posts.map((post) => (
-              <Link href={`/posts/${post.id}`} key={post.id}>
-                <div className="card">
-                  <h3>{post.title} &rarr;</h3>
-                  <p>{post.content.slice(0, 30)}...</p>
-                  <p>{post.author.email}</p>
-                </div>
-              </Link>
-            ))
-          )}
-          <div className="card">
-            <form onSubmit={handleSubmit}>
-              {errorMsg && <p>{errorMsg}</p>}
-              <Field
-                name="title"
-                type="text"
-                autoComplete="title"
-                required={false}
-                label="Title"
-                value={inputs.title}
-                onChange={handleChange}
-              />
-              <Field
-                name="content"
-                type="text"
-                autoComplete="content"
-                required={false}
-                label="Content"
-                value={inputs.content}
-                onChange={handleChange}
-              />
-              <button type="submit">Create</button> or{' '}
-              <Link href="signup">
-                <a>Sign up</a>
-              </Link>
-            </form>
-          </div>
+          <Posts loading={loading} error={error} data={data} />
+          <PostForm initial={initial} />
         </div>
       </main>
     </div>

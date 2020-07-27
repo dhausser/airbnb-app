@@ -1,8 +1,8 @@
-import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { GetStaticPaths, GetStaticProps } from 'next'
 import { useQuery, gql, ApolloClient } from '@apollo/client'
 import { initializeApollo } from '../../apollo/client'
+import { Post as SinglePost } from '../../components/post'
 import { PostsQuery } from '../index'
 import * as PostQueryTypes from '../../__generated__/PostQuery'
 
@@ -32,21 +32,7 @@ export const Post = (): JSX.Element => {
 
   return (
     <div className="grid">
-      <div className="card">
-        {loading ? (
-          <p>Loading...</p>
-        ) : error ? (
-          <p>{`${error.name}: ${error.message}`}</p>
-        ) : (
-          <Link href="/">
-            <div>
-              <h3>{data.post.title} &rarr;</h3>
-              <p>{data.post.content}</p>
-              <p>{data.post.author.email}</p>
-            </div>
-          </Link>
-        )}
-      </div>
+      <SinglePost loading={loading} error={error} data={data} />
     </div>
   )
 }
