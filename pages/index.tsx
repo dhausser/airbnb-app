@@ -3,9 +3,11 @@ import Head from 'next/head'
 import Link from 'next/link'
 import { GetStaticProps } from 'next'
 import { ApolloClient } from '@apollo/client'
+
 import { initializeApollo } from '../apollo/client'
 import { useQuery, useMutation, useApolloClient, gql } from '@apollo/client'
 import { getErrorMessage } from '../lib/form'
+import useForm from '../lib/use-form'
 import Field from '../components/field'
 import * as PostsQueryTypes from '../__generated__/PostsQuery'
 
@@ -46,18 +48,13 @@ export const Home = (): JSX.Element => {
   const [createDraft] = useMutation(CreateDraftMutation)
   const [deletePosts] = useMutation(DeletePostsMutation)
   const { loading, error, data } = useQuery<PostsQueryTypes.PostsQuery>(PostsQuery)
-  const initialValues = { title: 'test', content: 'test', authorEmail: 'davy@prisma.io' }
-  const [values, setValues] = useState(initialValues)
-  const [errorMsg, setErrorMsg] = useState()
+  const { inputs, handleChange } = useForm({ title: 'test', content: 'test', authorEmail: 'davy@prisma.io' })
 
-  function handleChange(event) {
-    const { name, value } = event.target
-    setValues({ ...values, [name]: value })
-  }
+  const [errorMsg, setErrorMsg] = useState()
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>): Promise<void> {
     event.preventDefault()
-    const { title, content, authorEmail } = values
+    const { title, content, authorEmail } = inputs
     try {
       const { data } = await createDraft({
         variables: { title, content, authorEmail },
@@ -120,6 +117,7 @@ export const Home = (): JSX.Element => {
                 autoComplete="title"
                 required={false}
                 label="Title"
+                value={inputs.title}
                 onChange={handleChange}
               />
               <Field
@@ -128,6 +126,7 @@ export const Home = (): JSX.Element => {
                 autoComplete="content"
                 required={false}
                 label="Content"
+                value={inputs.content}
                 onChange={handleChange}
               />
               <button type="submit">Create</button> or{' '}
@@ -144,7 +143,7 @@ export const Home = (): JSX.Element => {
 
 // This also gets called at build time
 export const getStaticProps: GetStaticProps = async () => {
-  const apolloClient: ApolloClient<{}> = initializeApollo()
+  const apolloClient: ApolloClient<unknown> = initializeApollo()
 
   await apolloClient.query({
     query: PostsQuery,

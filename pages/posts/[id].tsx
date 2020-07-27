@@ -72,7 +72,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 // This also gets called at build time
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const apolloClient: ApolloClient<{}> = initializeApollo()
+  const apolloClient: ApolloClient<unknown> = initializeApollo()
 
   await apolloClient.query({
     query: PostQuery,

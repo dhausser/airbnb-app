@@ -1,4 +1,22 @@
-export default function Field({ name, label, type, autoComplete, required, onChange }) {
+interface FormProps {
+  name: string
+  label: string
+  type: string
+  autoComplete: string
+  required: boolean
+  value: string
+  onChange: (event: React.SyntheticEvent) => void
+}
+
+export default function Field({
+  name,
+  label,
+  type,
+  autoComplete,
+  required,
+  value,
+  onChange,
+}: FormProps): JSX.Element {
   return (
     <div>
       <label id={[name, 'label'].join('-')} htmlFor={[name, 'input'].join('-')}>
@@ -11,6 +29,7 @@ export default function Field({ name, label, type, autoComplete, required, onCha
         name={name}
         required={required}
         type={type}
+        value={value}
         onChange={onChange}
       />
     </div>
