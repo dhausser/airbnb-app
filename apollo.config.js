@@ -1,6 +1,6 @@
 module.exports = {
   client: {
-    includes: ['./pages/**/*.tsx'],
+    includes: ['./apollo/**/*.ts'],
     service: {
       name: 'airbnb-app',
       localSchemaFile: 'api.graphql',

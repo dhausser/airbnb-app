@@ -1,34 +1,15 @@
 import { useRouter } from 'next/router'
 import { GetStaticPaths, GetStaticProps } from 'next'
-import { useQuery, gql, ApolloClient } from '@apollo/client'
+import { ApolloClient } from '@apollo/client'
 import { initializeApollo } from '../../apollo/client'
 import { Post as SinglePost } from '../../components/post'
-import { PostsQuery } from '../index'
-import * as PostQueryTypes from '../../__generated__/PostQuery'
-
-const PostQuery = gql`
-  query PostQuery($id: ID!) {
-    post(id: $id) {
-      id
-      title
-      content
-      author {
-        email
-      }
-    }
-  }
-`
+import { GET_POSTS_QUERY, GET_POST_QUERY } from '../../apollo/queries'
+import { usePost } from '../../apollo/hooks'
 
 export const Post = (): JSX.Element => {
   const router = useRouter()
   const { id } = router.query
-
-  const { loading, error, data } = useQuery<PostQueryTypes.PostQuery, PostQueryTypes.PostQueryVariables>(
-    PostQuery,
-    {
-      variables: { id: id as string },
-    }
-  )
+  const { loading, error, data } = usePost(id)
 
   return (
     <div className="grid">
@@ -45,7 +26,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   const {
     data: { posts },
   } = await apolloClient.query({
-    query: PostsQuery,
+    query: GET_POSTS_QUERY,
   })
 
   // Get the paths we want to pre-render based on posts
@@ -61,7 +42,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   const apolloClient: ApolloClient<unknown> = initializeApollo()
 
   await apolloClient.query({
-    query: PostQuery,
+    query: GET_POST_QUERY,
     variables: {
       id: params.id,
     },

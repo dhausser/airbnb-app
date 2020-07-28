@@ -1,35 +1,17 @@
 import Head from 'next/head'
 import { GetStaticProps } from 'next'
-import { useQuery, useMutation, useApolloClient, gql, ApolloClient } from '@apollo/client'
+import { useApolloClient, ApolloClient } from '@apollo/client'
 
 import { initializeApollo } from '../apollo/client'
+import { GET_POSTS_QUERY } from '../apollo/queries'
+import { usePosts, useDeletePosts } from '../apollo/hooks'
 import { Posts } from '../components/posts'
 import { PostForm } from '../components/post-form'
-import * as PostsQueryTypes from '../__generated__/PostsQuery'
-
-export const PostsQuery = gql`
-  query PostsQuery {
-    posts {
-      id
-      title
-      content
-      author {
-        email
-      }
-    }
-  }
-`
-
-const DeletePostsMutation = gql`
-  mutation DeletePosts {
-    deletePosts
-  }
-`
 
 export const Home = (): JSX.Element => {
   const client = useApolloClient()
-  const [deletePosts] = useMutation(DeletePostsMutation)
-  const { loading, error, data } = useQuery<PostsQueryTypes.PostsQuery>(PostsQuery)
+  const { loading, error, data } = usePosts()
+  const [deletePosts] = useDeletePosts()
   const initial = { title: 'test', content: 'test', authorEmail: 'davy@prisma.io' }
 
   async function handleDelete() {
@@ -67,7 +49,7 @@ export const getStaticProps: GetStaticProps = async () => {
   const apolloClient: ApolloClient<unknown> = initializeApollo()
 
   await apolloClient.query({
-    query: PostsQuery,
+    query: GET_POSTS_QUERY,
   })
 
   // Pass post data to the page via props
