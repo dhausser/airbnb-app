@@ -5,6 +5,9 @@ import { prodEndpoint, devEndpoint } from '../config.json'
 let apolloClient
 
 function createIsomorphLink() {
+  /**
+   * TODO: enable window === 'undefined' block
+   */
   //   if (typeof window === 'undefined') {
   //     const { SchemaLink } = require('@apollo/client/link/schema')
   //     const { schema } = require('./../pages/api/graphql')
@@ -26,7 +29,7 @@ function createApolloClient() {
   })
 }
 
-export function initializeApollo(initialState = null) {
+export function initializeApollo(initialState = null): ApolloClient<unknown> {
   const _apolloClient = apolloClient ?? createApolloClient()
 
   // If your page has Next.js data fetching methods that use Apollo Client, the initial state
@@ -42,7 +45,7 @@ export function initializeApollo(initialState = null) {
   return _apolloClient
 }
 
-export function useApollo(initialState) {
+export function useApollo(initialState: unknown): ApolloClient<unknown> {
   const store = useMemo(() => initializeApollo(initialState), [initialState])
   return store
 }

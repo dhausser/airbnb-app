@@ -6,9 +6,18 @@ import { v4 as uuidv4 } from 'uuid'
  * db here, such as MongoDB, Fauna, SQL, etc.
  */
 
+interface User {
+  id: string
+  createdAt: number
+  email: string
+  password?: string
+  salt: string
+  hash: string
+}
+
 const users = []
 
-export async function createUser({ email, password }) {
+export async function createUser({ email, password }: User): Promise<User> {
   // Here you should create the user and save the salt and hashed password (some dbs may have
   // authentication methods that will do it for you so you don't have to worry about it):
   const salt = crypto.randomBytes(16).toString('hex')
@@ -28,14 +37,14 @@ export async function createUser({ email, password }) {
 }
 
 // Here you should lookup for the user in your DB
-export async function findUser({ email }) {
+export async function findUser({ email }: { email: string }): Promise<User[]> {
   // This is an in memory store for users, there is no data persistence without a proper DB
   return users.find((user) => user.email === email)
 }
 
 // Compare the password of an already fetched user (using `findUser`) and compare the
 // password for a potential match
-export async function validatePassword(user, inputPassword) {
+export async function validatePassword(user: User, inputPassword: string): Promise<boolean> {
   const inputHash = crypto.pbkdf2Sync(inputPassword, user.salt, 1000, 64, 'sha512').toString('hex')
   const passwordsMatch = user.hash === inputHash
   return passwordsMatch
