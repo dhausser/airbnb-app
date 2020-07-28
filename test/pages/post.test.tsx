@@ -1,6 +1,6 @@
-import React from 'react'
-import { render } from '../testUtils'
-import { Post } from '../../pages/posts/[id]'
+// import React from 'react'
+// import { render } from '../testUtils'
+// import { Post } from '../../pages/posts/[id]'
 
 // const post = {
 //   id: 1,
@@ -12,10 +12,10 @@ import { Post } from '../../pages/posts/[id]'
 //   published: false,
 // }
 
-describe('Home page', () => {
-  it('matches snapshot', () => {
-    // const { asFragment } = render(<Post post={post} />, {})
-    const { asFragment } = render(<Post />, {})
-    expect(asFragment()).toMatchSnapshot()
-  })
-})
+// describe('Home page', () => {
+//   it('matches snapshot', () => {
+//     // const { asFragment } = render(<Post post={post} />, {})
+//     const { asFragment } = render(<Post />, {})
+//     expect(asFragment()).toMatchSnapshot()
+//   })
+// })
