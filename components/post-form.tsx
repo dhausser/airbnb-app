@@ -2,7 +2,6 @@ import { useState, FormEvent } from 'react'
 import { useMutation, useApolloClient, gql } from '@apollo/client'
 import Link from 'next/link'
 
-import { getErrorMessage } from '../lib/form'
 import useForm from '../lib/use-form'
 import Field from '../components/field'
 
@@ -44,7 +43,7 @@ export const PostForm: React.FC<Props> = ({ initial }) => {
         await client.resetStore()
       }
     } catch (error) {
-      setErrorMsg(getErrorMessage(error))
+      setErrorMsg(error.message)
     }
   }
 
