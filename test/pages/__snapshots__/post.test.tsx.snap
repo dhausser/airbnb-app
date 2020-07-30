@@ -1,23 +1,45 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Home page matches snapshot 1`] = `
-<DocumentFragment>
+exports[`Single post page matches snapshot 1`] = `
+<div>
   <div
     class="grid"
   >
     <div
       class="card"
     >
-      <h3>
-        Hello World →
-      </h3>
       <p>
-        This is the hello world content
-      </p>
-      <p>
-        alice@prisma.io
+        Loading...
       </p>
     </div>
   </div>
-</DocumentFragment>
+</div>
 `;
+
+exports[`Single post page matches snapshot 2`] = `
+<div>
+  <div
+    class="grid"
+  >
+    <div
+      class="card"
+    >
+      <div>
+        <h3>
+          Hello World
+           →
+        </h3>
+        <p>
+          This is the hello world conten
+          ...
+        </p>
+        <p>
+          alice@prisma.io
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Single post page matches snapshot 3`] = `<div />`;

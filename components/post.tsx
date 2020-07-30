@@ -8,7 +8,7 @@ interface Props {
   data: PostQuery
 }
 
-export const Post: React.FC<Props> = ({ loading, error, data: { post } }) => {
+export const Post: React.FC<Props> = ({ loading, error, data }) => {
   return (
     <div className="card">
       {loading ? (
@@ -16,11 +16,11 @@ export const Post: React.FC<Props> = ({ loading, error, data: { post } }) => {
       ) : error ? (
         <p>{`${error.name}: ${error.message}`}</p>
       ) : (
-        <Link href={`/posts/${post.id}`} key={post.id}>
+        <Link href={`/posts/${data.post.id}`} key={data.post.id}>
           <div>
-            <h3>{post.title} &rarr;</h3>
-            <p>{post.content.slice(0, 30)}...</p>
-            <p>{post.author.email}</p>
+            <h3>{data.post.title} &rarr;</h3>
+            <p>{data.post.content.slice(0, 30)}...</p>
+            <p>{data.post.author.email}</p>
           </div>
         </Link>
       )}

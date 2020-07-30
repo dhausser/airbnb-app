@@ -8,7 +8,7 @@ import { usePosts, useDeletePosts } from '../apollo/hooks'
 import { Posts } from '../components/posts'
 import { PostForm } from '../components/post-form'
 
-export const Home = (): JSX.Element => {
+export const Home: React.FC = () => {
   const client = useApolloClient()
   const { loading, error, data } = usePosts()
   const [deletePosts] = useDeletePosts()

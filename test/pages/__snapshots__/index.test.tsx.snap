@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Home page matches snapshot 1`] = `
-<DocumentFragment>
+<div>
   <div
     class="container"
   >
@@ -16,6 +16,96 @@ exports[`Home page matches snapshot 1`] = `
       >
         Get started by listing your home to swing.
       </p>
+      <button>
+        Delete all
+      </button>
+      <div
+        class="grid"
+      >
+        <div
+          class="card"
+        >
+          <p>
+            Loading...
+          </p>
+        </div>
+        <div
+          class="card"
+        >
+          <form>
+            <div>
+              <label
+                for="title-input"
+                id="title-label"
+              >
+                Title
+                 
+              </label>
+              <br />
+              <input
+                autocomplete="title"
+                id="title-input"
+                name="title"
+                type="text"
+                value="test"
+              />
+            </div>
+            <div>
+              <label
+                for="content-input"
+                id="content-label"
+              >
+                Content
+                 
+              </label>
+              <br />
+              <input
+                autocomplete="content"
+                id="content-input"
+                name="content"
+                type="text"
+                value="test"
+              />
+            </div>
+            <button
+              type="submit"
+            >
+              Create
+            </button>
+             or
+             
+            <a
+              href="signup"
+            >
+              Sign up
+            </a>
+          </form>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+`;
+
+exports[`Home page matches snapshot 2`] = `
+<div>
+  <div
+    class="container"
+  >
+    <main>
+      <h1
+        class="title"
+      >
+        Home Swing
+      </h1>
+      <p
+        class="description"
+      >
+        Get started by listing your home to swing.
+      </p>
+      <button>
+        Delete all
+      </button>
       <div
         class="grid"
       >
@@ -23,10 +113,12 @@ exports[`Home page matches snapshot 1`] = `
           class="card"
         >
           <h3>
-            Hello World →
+            Hello World
+             →
           </h3>
           <p>
-            This is the first hello world content
+            This is the first hello world 
+            ...
           </p>
           <p>
             alice@prisma.io
@@ -36,10 +128,12 @@ exports[`Home page matches snapshot 1`] = `
           class="card"
         >
           <h3>
-            Hello Second World →
+            Hello Second World
+             →
           </h3>
           <p>
-            This is the second hello world content
+            This is the second hello world
+            ...
           </p>
           <p>
             mark@prisma.io
@@ -49,17 +143,73 @@ exports[`Home page matches snapshot 1`] = `
           class="card"
         >
           <h3>
-            Hello Third World →
+            Hello Third World
+             →
           </h3>
           <p>
-            This is the third hello world content
+            This is the third hello world 
+            ...
           </p>
           <p>
             rob@prisma.io
           </p>
         </div>
+        <div
+          class="card"
+        >
+          <form>
+            <div>
+              <label
+                for="title-input"
+                id="title-label"
+              >
+                Title
+                 
+              </label>
+              <br />
+              <input
+                autocomplete="title"
+                id="title-input"
+                name="title"
+                type="text"
+                value="test"
+              />
+            </div>
+            <div>
+              <label
+                for="content-input"
+                id="content-label"
+              >
+                Content
+                 
+              </label>
+              <br />
+              <input
+                autocomplete="content"
+                id="content-input"
+                name="content"
+                type="text"
+                value="test"
+              />
+            </div>
+            <button
+              type="submit"
+            >
+              Create
+            </button>
+             or
+             
+            <a
+              href="signup"
+            >
+              Sign up
+            </a>
+          </form>
+        </div>
       </div>
     </main>
   </div>
-</DocumentFragment>
+</div>
 `;
+
+exports[`Home page matches snapshot 3`] = `<div />`;

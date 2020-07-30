@@ -6,9 +6,10 @@ import { Post as SinglePost } from '../../components/post'
 import { GET_POSTS_QUERY, GET_POST_QUERY } from '../../apollo/queries'
 import { usePost } from '../../apollo/hooks'
 
-export const Post = (): JSX.Element => {
+export const Post: React.FC = () => {
   const router = useRouter()
   const { id } = router.query
+
   const { loading, error, data } = usePost(id)
 
   return (
