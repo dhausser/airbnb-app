@@ -1,5 +1,4 @@
 import { InMemoryCache } from '@apollo/client'
-import { MockedProvider } from '@apollo/client/testing'
 import { render, cleanup, waitFor } from '../test-utils'
 import { Post } from '../../pages/posts/[id]'
 import { GET_POST_QUERY } from '../../apollo/queries'
@@ -32,25 +31,21 @@ describe('Single post page', () => {
   afterEach(cleanup)
 
   it('renders without error', () => {
-    render(
-      <MockedProvider mocks={mocks} cache={cache}>
-        <Post />
-      </MockedProvider>,
-      {
-        router: { query: { id: '42' } },
-      }
-    )
+    render(<Post />, {
+      router: { query: { id: '42' } },
+      mocks,
+      cache,
+      addTypename: false,
+    })
   })
 
   it('matches snapshot', async () => {
-    const { container } = render(
-      <MockedProvider mocks={mocks} cache={cache}>
-        <Post />
-      </MockedProvider>,
-      {
-        router: { query: { id: '42' } },
-      }
-    )
+    const { container } = render(<Post />, {
+      router: { query: { id: '42' } },
+      mocks,
+      cache,
+      addTypename: false,
+    })
 
     waitFor(() => expect(container).toMatchSnapshot())
   })

@@ -1,4 +1,3 @@
-import { MockedProvider } from '@apollo/client/testing'
 import { InMemoryCache } from '@apollo/client'
 import { render, cleanup, waitFor } from '../test-utils'
 import { GET_POSTS_QUERY } from '../../apollo/queries'
@@ -51,21 +50,19 @@ describe('Home page', () => {
   afterEach(cleanup)
 
   it('renders without error', () => {
-    render(
-      <MockedProvider mocks={mocks} cache={cache}>
-        <Home />
-      </MockedProvider>,
-      {}
-    )
+    render(<Home />, {
+      mocks,
+      cache,
+      addTypename: false,
+    })
   })
 
   it('matches snapshot', () => {
-    const { container } = render(
-      <MockedProvider mocks={mocks} cache={cache}>
-        <Home />
-      </MockedProvider>,
-      {}
-    )
+    const { container } = render(<Home />, {
+      mocks,
+      cache,
+      addTypename: false,
+    })
 
     waitFor(() => expect(container).toMatchSnapshot())
   })

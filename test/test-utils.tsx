@@ -2,7 +2,8 @@ import React from 'react'
 import { render as defaultRender, cleanup, waitFor } from '@testing-library/react'
 import { RouterContext } from 'next/dist/next-server/lib/router-context'
 import { NextRouter } from 'next/router'
-// import { MockedProvider } from '@apollo/client/testing'
+import { MockedProvider, MockedResponse } from '@apollo/client/testing'
+import { ApolloCache } from '@apollo/client'
 
 export * from '@testing-library/react'
 
@@ -17,15 +18,23 @@ export * from '@testing-library/react'
 // --------------------------------------------------
 type DefaultParams = Parameters<typeof defaultRender>
 type RenderUI = DefaultParams[0]
-type RenderOptions = DefaultParams[1] & { router?: Partial<NextRouter> }
+type RenderOptions = DefaultParams[1] & {
+  router?: Partial<NextRouter>
+  mocks: MockedResponse[]
+  cache: ApolloCache<any> | undefined
+  addTypename?: boolean
+}
 
-export function render(ui: RenderUI, { wrapper, router, ...options }: RenderOptions = {}) {
+export function render(
+  ui: RenderUI,
+  { wrapper, router, mocks, cache, addTypename, ...options }: RenderOptions = {}
+) {
   if (!wrapper) {
     wrapper = ({ children }) => (
       <RouterContext.Provider value={{ ...mockRouter, ...router }}>
-        {/* <MockedProvider mocks={mocks} cache={cache}> */}
-        {children}
-        {/* </MockedProvider> */}
+        <MockedProvider mocks={mocks} cache={cache} addTypename={addTypename}>
+          {children}
+        </MockedProvider>
       </RouterContext.Provider>
     )
   }
