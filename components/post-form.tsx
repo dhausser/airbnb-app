@@ -4,6 +4,7 @@ import Link from 'next/link'
 
 import useForm from '../lib/use-form'
 import Field from '../components/field'
+import { getErrorMessage } from '../lib/form'
 
 interface Props {
   initial: {
@@ -29,7 +30,7 @@ const CreateDraftMutation = gql`
 export const PostForm: React.FC<Props> = ({ initial }) => {
   const client = useApolloClient()
   const [createDraft] = useMutation(CreateDraftMutation)
-  const [errorMsg, setErrorMsg] = useState()
+  const [errorMsg, setErrorMsg] = useState('')
   const { inputs, handleChange } = useForm(initial)
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>): Promise<void> {
@@ -43,7 +44,7 @@ export const PostForm: React.FC<Props> = ({ initial }) => {
         await client.resetStore()
       }
     } catch (error) {
-      setErrorMsg(error.message)
+      setErrorMsg(getErrorMessage(error.message))
     }
   }
 
