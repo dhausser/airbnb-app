@@ -1,6 +1,6 @@
 import { InMemoryCache } from '@apollo/client'
 import { render, cleanup, waitFor } from '../test-utils'
-import { Post } from '../../pages/posts/[id]'
+import { SinglePost } from '../../pages/posts/[id]'
 import { GET_POST_QUERY } from '../../apollo/queries'
 
 const cache = new InMemoryCache({ addTypename: false })
@@ -31,7 +31,7 @@ describe('Single post page', () => {
   afterEach(cleanup)
 
   it('renders without error', () => {
-    render(<Post />, {
+    render(<SinglePost />, {
       router: { query: { id: '42' } },
       mocks,
       cache,
@@ -40,7 +40,7 @@ describe('Single post page', () => {
   })
 
   it('matches snapshot', async () => {
-    const { container } = render(<Post />, {
+    const { container } = render(<SinglePost />, {
       router: { query: { id: '42' } },
       mocks,
       cache,
