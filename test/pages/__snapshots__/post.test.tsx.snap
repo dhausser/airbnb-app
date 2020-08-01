@@ -5,13 +5,9 @@ exports[`Single post page matches snapshot 1`] = `
   <div
     class="grid"
   >
-    <div
-      class="card"
-    >
-      <p>
-        Loading...
-      </p>
-    </div>
+    <p>
+      Loading...
+    </p>
   </div>
 </div>
 `;
