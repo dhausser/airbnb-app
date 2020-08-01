@@ -1,27 +1,14 @@
-import { ApolloError } from '@apollo/client'
-import { PostCard } from './post-card'
-import { PostsQuery } from '../__generated__/PostsQuery'
+import { PostCard, PostsProps } from './post-card'
 
-interface Props {
-  loading: boolean
-  error: ApolloError
-  data: PostsQuery
-}
+export const Posts: React.FC<PostsProps> = ({ loading, error, data }) => {
+  if (error) return <p>{`${error.name}: ${error.message}`}</p>
+  if (loading || !data.posts) return <p>Loading...</p>
 
-export const Posts: React.FC<Props> = ({ loading, error, data }) => {
   return (
     <>
-      {loading ? (
-        <div className="card">
-          <p>Loading...</p>
-        </div>
-      ) : error ? (
-        <div className="card">
-          <p>{`${error.name}: ${error.message}`}</p>
-        </div>
-      ) : (
-        data.posts.map((post) => <PostCard key={post.id} post={post} />)
-      )}
+      {data.posts.map((post) => (
+        <PostCard key={post.id as string} post={post} />
+      ))}
     </>
   )
 }

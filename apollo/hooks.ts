@@ -8,7 +8,7 @@ import * as DeletePostsMutationTypes from '../__generated__/DeletePosts'
 
 interface QueryResults {
   loading: boolean
-  error: ApolloError
+  error: ApolloError | undefined
   data: any
 }
 

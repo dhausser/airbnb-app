@@ -14,7 +14,9 @@ export const Post: React.FC = () => {
 
   return (
     <div className="grid">
-      <SinglePost loading={loading} error={error} data={data} />
+      <div className="card">
+        <SinglePost loading={loading} error={error} data={data} />
+      </div>
     </div>
   )
 }
@@ -45,7 +47,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   await apolloClient.query({
     query: GET_POST_QUERY,
     variables: {
-      id: params.id,
+      id: params?.id,
     },
   })
 
