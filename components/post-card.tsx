@@ -19,11 +19,11 @@ export interface PostsProps extends Props {
 export const PostCard: React.FC<PostQuery> = ({ post }) => {
   return (
     <Link href={`/posts/${post?.id}`} key={post?.id as string}>
-      {/* <> */}
-      <h3>{post?.title} &rarr;</h3>
-      <p>{post?.content?.slice(0, 30)}...</p>
-      <p>{post?.author?.email}</p>
-      {/* </> */}
+      <>
+        <h3>{post?.title} &rarr;</h3>
+        <p>{post?.content?.slice(0, 30)}...</p>
+        <p>{post?.author?.email}</p>
+      </>
     </Link>
   )
 }
