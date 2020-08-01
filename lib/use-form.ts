@@ -1,8 +1,10 @@
-import { useState, SyntheticEvent } from 'react'
+import { useState, ChangeEvent } from 'react'
+
+type Event = ChangeEvent<HTMLInputElement>
 
 interface Form {
   inputs: any
-  handleChange: (event: SyntheticEvent) => void
+  handleChange: (event: Event) => void
   resetForm: () => void
   clearForm: () => void
 }
@@ -10,7 +12,7 @@ interface Form {
 export default function useForm(initial = {}): Form {
   const [inputs, setInputs] = useState(initial)
 
-  function handleChange(event) {
+  function handleChange(event: Event) {
     const { name, value } = event.target
     setInputs({ ...inputs, [name]: value })
   }

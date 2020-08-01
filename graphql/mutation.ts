@@ -15,7 +15,7 @@ schema.mutationType({
             title: args.title,
             content: args.content,
             author: {
-              connect: { email: args.authorEmail },
+              connect: { email: args.authorEmail as string },
             },
           },
         })
@@ -46,7 +46,7 @@ schema.mutationType({
           data: {
             bio,
             user: {
-              connect: { email: userEmail },
+              connect: { email: userEmail as string },
             },
           },
         })
