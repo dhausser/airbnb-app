@@ -5,7 +5,7 @@ interface FormProps {
   autoComplete: string
   required: boolean
   value: string
-  onChange: (event: React.SyntheticEvent) => void
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void
 }
 
 export default function Field({
