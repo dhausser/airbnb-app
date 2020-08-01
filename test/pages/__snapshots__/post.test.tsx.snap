@@ -24,19 +24,17 @@ exports[`Single post page matches snapshot 2`] = `
     <div
       class="card"
     >
-      <div>
-        <h3>
-          Hello World
-           →
-        </h3>
-        <p>
-          This is the hello world conten
-          ...
-        </p>
-        <p>
-          alice@prisma.io
-        </p>
-      </div>
+      <h3>
+        Hello World
+         →
+      </h3>
+      <p>
+        This is the hello world conten
+        ...
+      </p>
+      <p>
+        alice@prisma.io
+      </p>
     </div>
   </div>
 </div>

@@ -22,13 +22,9 @@ exports[`Home page matches snapshot 1`] = `
       <div
         class="grid"
       >
-        <div
-          class="card"
-        >
-          <p>
-            Loading...
-          </p>
-        </div>
+        <p>
+          Loading...
+        </p>
         <div
           class="card"
         >
@@ -110,51 +106,39 @@ exports[`Home page matches snapshot 2`] = `
       <div
         class="grid"
       >
-        <div
-          class="card"
-        >
-          <h3>
-            Hello World
-             →
-          </h3>
-          <p>
-            This is the first hello world 
-            ...
-          </p>
-          <p>
-            alice@prisma.io
-          </p>
-        </div>
-        <div
-          class="card"
-        >
-          <h3>
-            Hello Second World
-             →
-          </h3>
-          <p>
-            This is the second hello world
-            ...
-          </p>
-          <p>
-            mark@prisma.io
-          </p>
-        </div>
-        <div
-          class="card"
-        >
-          <h3>
-            Hello Third World
-             →
-          </h3>
-          <p>
-            This is the third hello world 
-            ...
-          </p>
-          <p>
-            rob@prisma.io
-          </p>
-        </div>
+        <h3>
+          Hello World
+           →
+        </h3>
+        <p>
+          This is the first hello world 
+          ...
+        </p>
+        <p>
+          alice@prisma.io
+        </p>
+        <h3>
+          Hello Second World
+           →
+        </h3>
+        <p>
+          This is the second hello world
+          ...
+        </p>
+        <p>
+          mark@prisma.io
+        </p>
+        <h3>
+          Hello Third World
+           →
+        </h3>
+        <p>
+          This is the third hello world 
+          ...
+        </p>
+        <p>
+          rob@prisma.io
+        </p>
         <div
           class="card"
         >
