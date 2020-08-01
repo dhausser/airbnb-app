@@ -2,12 +2,12 @@ import { useRouter, NextRouter } from 'next/router'
 import { GetStaticPaths, GetStaticProps } from 'next'
 import { ApolloClient, NormalizedCacheObject } from '@apollo/client'
 import { initializeApollo } from '../../apollo/client'
-import { Post as SinglePost } from '../../components/post'
+import { Post } from '../../components/post'
 import { GET_POSTS_QUERY, GET_POST_QUERY } from '../../apollo/queries'
 import { usePost } from '../../apollo/hooks'
 import { PostQuery_post } from '../../__generated__/PostQuery'
 
-export const Post: React.FC = () => {
+export const SinglePost: React.FC = () => {
   const router: NextRouter = useRouter()
   const { id } = router.query
 
@@ -15,9 +15,7 @@ export const Post: React.FC = () => {
 
   return (
     <div className="grid">
-      <div className="card">
-        <SinglePost loading={loading} error={error} data={data} />
-      </div>
+      <Post loading={loading} error={error} data={data} />
     </div>
   )
 }
@@ -58,4 +56,4 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   }
 }
 
-export default Post
+export default SinglePost

@@ -6,13 +6,13 @@ let apolloClient: ApolloClient<NormalizedCacheObject | null>
 
 function createIsomorphLink() {
   /**
-   * TODO: enable window === 'undefined' block
+   * TODO: Make Executable Schema with Nexus
    */
-  //   if (typeof window === 'undefined') {
-  //     const { SchemaLink } = require('@apollo/client/link/schema')
-  //     const { schema } = require('./../pages/api/graphql')
-  //     return new SchemaLink({ schema })
-  //   } else {
+  // if (typeof window === 'undefined') {
+  //   const { SchemaLink } = require('@apollo/client/link/schema')
+  //   const { schema } = require('nexus')
+  //   return new SchemaLink({ schema })
+  // } else {
   const { HttpLink } = require('@apollo/client/link/http')
   return new HttpLink({
     uri: process.env.NODE_ENV === 'production' ? prodEndpoint : devEndpoint,
