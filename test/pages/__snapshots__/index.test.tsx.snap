@@ -33,6 +33,7 @@ exports[`Home page matches snapshot 1`] = `
           class="card"
         >
           <form>
+            
             <div>
               <label
                 for="title-input"
@@ -158,6 +159,7 @@ exports[`Home page matches snapshot 2`] = `
           class="card"
         >
           <form>
+            
             <div>
               <label
                 for="title-input"
