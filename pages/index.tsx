@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import { GetStaticProps } from 'next'
+import { GetServerSideProps } from 'next'
 import { useApolloClient, ApolloClient } from '@apollo/client'
 
 import { initializeApollo } from '../apollo/client'
@@ -7,6 +7,8 @@ import { GET_POSTS_QUERY } from '../apollo/queries'
 import { usePosts, useDeletePosts } from '../apollo/hooks'
 import { Posts } from '../components/posts'
 import { PostForm } from '../components/post-form'
+
+// import { GetStaticProps } from 'next'
 
 export const Home: React.FC = () => {
   const client = useApolloClient()
@@ -44,8 +46,7 @@ export const Home: React.FC = () => {
   )
 }
 
-// This also gets called at build time
-export const getStaticProps: GetStaticProps = async () => {
+export const getServerSideProps: GetServerSideProps = async () => {
   const apolloClient: ApolloClient<unknown> = initializeApollo()
 
   await apolloClient.query({
@@ -59,5 +60,21 @@ export const getStaticProps: GetStaticProps = async () => {
     },
   }
 }
+
+// This also gets called at build time
+// export const getStaticProps: GetStaticProps = async () => {
+//   const apolloClient: ApolloClient<unknown> = initializeApollo()
+
+//   await apolloClient.query({
+//     query: GET_POSTS_QUERY,
+//   })
+
+//   // Pass post data to the page via props
+//   return {
+//     props: {
+//       initialApolloState: apolloClient.cache.extract(),
+//     },
+//   }
+// }
 
 export default Home
