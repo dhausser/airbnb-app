@@ -1,6 +1,6 @@
-import { schema } from 'nexus'
+import { objectType } from '@nexus/schema'
 
-schema.objectType({
+export const User = objectType({
   name: 'User',
   definition: (t) => {
     t.id('id')
@@ -10,7 +10,7 @@ schema.objectType({
       type: 'Post',
       nullable: true,
       resolve(parent, _args, ctx) {
-        return ctx.db.post.findMany({
+        return ctx.prisma.post.findMany({
           where: { authorId: Number(parent.id) },
         })
       },
@@ -19,7 +19,7 @@ schema.objectType({
       type: 'Profile',
       nullable: true,
       resolve(parent, _args, ctx) {
-        return ctx.db.profile.findOne({
+        return ctx.prisma.profile.findOne({
           where: { userId: Number(parent.id) },
         })
       },

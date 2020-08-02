@@ -3,7 +3,7 @@ module.exports = {
     includes: ['./apollo/**/*.ts'],
     service: {
       name: 'airbnb-app',
-      localSchemaFile: 'api.graphql',
+      localSchemaFile: 'schema.graphql',
     },
   },
 }

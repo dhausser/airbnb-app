@@ -1,24 +1,22 @@
 import { useMemo } from 'react'
 import { ApolloClient, InMemoryCache, NormalizedCacheObject } from '@apollo/client'
-import { prodEndpoint, devEndpoint } from '../config.json'
 
 let apolloClient: ApolloClient<NormalizedCacheObject | null>
 
 function createIsomorphLink() {
-  /**
-   * TODO: Make Executable Schema with Nexus
-   */
-  // if (typeof window === 'undefined') {
-  //   const { SchemaLink } = require('@apollo/client/link/schema')
-  //   const { schema } = require('nexus')
-  //   return new SchemaLink({ schema })
-  // } else {
-  const { HttpLink } = require('@apollo/client/link/http')
-  return new HttpLink({
-    uri: process.env.NODE_ENV === 'production' ? prodEndpoint : devEndpoint,
-    credentials: 'same-origin',
-  })
-  // }
+  if (typeof window === 'undefined') {
+    const { SchemaLink } = require('@apollo/client/link/schema')
+    const { schema } = require('../graphql/schema')
+    const { createContext } = require('../graphql/context')
+    return new SchemaLink({ schema, context: createContext() })
+  } else {
+    const { HttpLink } = require('@apollo/client/link/http')
+    const { prodEndpoint, devEndpoint } = require('../config.json')
+    return new HttpLink({
+      uri: process.env.NODE_ENV === 'production' ? prodEndpoint : devEndpoint,
+      credentials: 'same-origin',
+    })
+  }
 }
 
 function createApolloClient() {

@@ -1,4 +1,20 @@
-import { use } from 'nexus'
-import { prisma } from 'nexus-plugin-prisma'
+import { makeSchema } from '@nexus/schema'
+import path from 'path'
 
-use(prisma())
+import { Query } from './query'
+import { Mutation } from './mutation'
+import { User } from './user'
+import { Post } from './post'
+import { Profile } from './profile'
+
+export const schema = makeSchema({
+  types: [Query, Mutation, User, Post, Profile],
+  typegenAutoConfig: {
+    contextType: '{ prisma: PrismaClient.PrismaClient }',
+    sources: [{ source: '.prisma/client', alias: 'PrismaClient' }],
+  },
+  outputs: {
+    schema: path.join(process.cwd(), 'schema.graphql'),
+    typegen: path.join(process.cwd(), '__generated__', 'nexusTypes.ts'),
+  },
+})

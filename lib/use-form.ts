@@ -1,9 +1,9 @@
 import { useState, ChangeEvent } from 'react'
 
+type Inputs = Record<string, string | undefined>
 type Event = ChangeEvent<HTMLInputElement>
-
-interface Form {
-  inputs: any
+type Form = {
+  inputs: Inputs
   handleChange: (event: Event) => void
   resetForm: () => void
   clearForm: () => void

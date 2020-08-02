@@ -1,14 +1,14 @@
-import { schema } from 'nexus'
+import { queryType, idArg } from '@nexus/schema'
 
-schema.queryType({
+export const Query = queryType({
   definition(t) {
     t.field('post', {
       type: 'Post',
       args: {
-        id: schema.idArg(),
+        id: idArg(),
       },
       resolve(_parent, { id }, ctx) {
-        return ctx.db.post.findOne({
+        return ctx.prisma.post.findOne({
           where: { id: Number(id) },
           include: { author: true },
         })
@@ -18,7 +18,7 @@ schema.queryType({
     t.list.field('posts', {
       type: 'Post',
       resolve(_parent, _args, ctx) {
-        return ctx.db.post.findMany({
+        return ctx.prisma.post.findMany({
           include: { author: true },
         })
       },
@@ -27,7 +27,7 @@ schema.queryType({
     t.list.field('users', {
       type: 'User',
       resolve(_parent, _args, ctx) {
-        return ctx.db.user.findMany({
+        return ctx.prisma.user.findMany({
           include: {
             posts: true,
             profile: true,
@@ -39,7 +39,7 @@ schema.queryType({
     t.list.field('profiles', {
       type: 'Profile',
       resolve(_parent, _args, ctx) {
-        return ctx.db.profile.findMany({
+        return ctx.prisma.profile.findMany({
           include: {
             user: true,
           },

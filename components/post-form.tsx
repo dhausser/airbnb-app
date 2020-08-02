@@ -3,7 +3,7 @@ import { useMutation, useApolloClient, gql } from '@apollo/client'
 import Link from 'next/link'
 
 import useForm from '../lib/use-form'
-import Field from '../components/field'
+import { Field } from '../components/field'
 import { getErrorMessage } from '../lib/form'
 
 interface Props {

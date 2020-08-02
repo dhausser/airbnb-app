@@ -4,11 +4,11 @@ interface FormProps {
   type: string
   autoComplete: string
   required: boolean
-  value: string
+  value: string | undefined
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void
 }
 
-export default function Field({
+export const Field: React.FC<FormProps> = ({
   name,
   label,
   type,
@@ -16,7 +16,7 @@ export default function Field({
   required,
   value,
   onChange,
-}: FormProps): JSX.Element {
+}) => {
   return (
     <div>
       <label id={[name, 'label'].join('-')} htmlFor={[name, 'input'].join('-')}>

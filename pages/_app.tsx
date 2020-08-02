@@ -4,7 +4,7 @@ import { useApollo } from '../apollo/client'
 
 import '../styles/global.css'
 
-export default function App({ Component, pageProps }: AppPropsType): JSX.Element {
+const App: React.FC<AppPropsType> = ({ Component, pageProps }) => {
   const apolloClient = useApollo(pageProps.initialApolloState)
 
   return (
@@ -13,3 +13,5 @@ export default function App({ Component, pageProps }: AppPropsType): JSX.Element
     </ApolloProvider>
   )
 }
+
+export default App

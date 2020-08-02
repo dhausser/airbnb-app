@@ -1,16 +1,16 @@
-import { schema } from 'nexus'
+import { mutationType, stringArg } from '@nexus/schema'
 
-schema.mutationType({
+export const Mutation = mutationType({
   definition(t) {
     t.field('createDraft', {
       type: 'Post',
       args: {
-        title: schema.stringArg({ nullable: false }),
-        content: schema.stringArg(),
-        authorEmail: schema.stringArg(),
+        title: stringArg({ nullable: false }),
+        content: stringArg(),
+        authorEmail: stringArg(),
       },
       resolve(_parent, args, ctx) {
-        return ctx.db.post.create({
+        return ctx.prisma.post.create({
           data: {
             title: args.title,
             content: args.content,
@@ -25,11 +25,11 @@ schema.mutationType({
     t.field('signupUser', {
       type: 'User',
       args: {
-        name: schema.stringArg(),
-        email: schema.stringArg({ nullable: false }),
+        name: stringArg(),
+        email: stringArg({ nullable: false }),
       },
       resolve(_parent, { email, name }, ctx) {
-        return ctx.db.user.create({
+        return ctx.prisma.user.create({
           data: { email, name },
         })
       },
@@ -38,11 +38,11 @@ schema.mutationType({
     t.field('createProfile', {
       type: 'Profile',
       args: {
-        bio: schema.stringArg(),
-        userEmail: schema.stringArg(),
+        bio: stringArg(),
+        userEmail: stringArg(),
       },
       resolve(_parent, { bio, userEmail }, ctx) {
-        return ctx.db.profile.create({
+        return ctx.prisma.profile.create({
           data: {
             bio,
             user: {
@@ -56,7 +56,7 @@ schema.mutationType({
     t.field('deletePosts', {
       type: 'Int',
       async resolve(_parent, _args, ctx) {
-        return (await ctx.db.post.deleteMany({})).count
+        return (await ctx.prisma.post.deleteMany({})).count
       },
     })
   },
