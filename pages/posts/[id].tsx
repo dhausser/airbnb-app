@@ -7,7 +7,7 @@ import { GET_POST_QUERY } from '../../apollo/queries'
 import { usePost } from '../../apollo/hooks'
 import { Post } from '../../components/post'
 
-import { Grid } from '../../shared/styles'
+import styles from '../../styles/Home.module.css'
 
 export const SinglePost: React.FC = () => {
   const router: NextRouter = useRouter()
@@ -16,9 +16,9 @@ export const SinglePost: React.FC = () => {
   const { loading, error, data } = usePost(id as string)
 
   return (
-    <Grid>
+    <div className={styles.grid}>
       <Post loading={loading} error={error} data={data} />
-    </Grid>
+    </div>
   )
 }
 

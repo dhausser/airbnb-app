@@ -8,7 +8,7 @@ import { usePosts, useDeletePosts } from '../apollo/hooks'
 import { Posts } from '../components/posts'
 import { PostForm } from '../components/post-form'
 
-import { Container, Title, Description, Grid } from '../shared/styles'
+import styles from '../styles/Home.module.css'
 
 export const Home: React.FC = () => {
   const client = useApolloClient()
@@ -24,25 +24,25 @@ export const Home: React.FC = () => {
   }
 
   return (
-    <Container>
+    <div>
       <Head>
         <title>Airbnb App</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main>
-        <Title>Home Swing</Title>
+      <main className={styles.main}>
+        <h1 className={styles.title}>Home Swing</h1>
 
-        <Description>Get started by listing your home to swing.</Description>
+        <p className={styles.description}>Get started by listing your home to swing.</p>
 
         <button onClick={handleDelete}>Delete all</button>
 
-        <Grid>
+        <div className={styles.grid}>
           <Posts loading={loading} error={error} data={data} />
           <PostForm initial={initial} />
-        </Grid>
+        </div>
       </main>
-    </Container>
+    </div>
   )
 }
 

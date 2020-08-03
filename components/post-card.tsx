@@ -3,7 +3,7 @@ import { ApolloError } from '@apollo/client'
 import { PostQuery } from '../__generated__/PostQuery'
 import { PostsQuery } from '../__generated__/PostsQuery'
 
-import { Card } from '../shared/styles'
+import styles from '../styles/Home.module.css'
 
 interface Props {
   loading: boolean
@@ -21,11 +21,11 @@ export interface PostsProps extends Props {
 export const PostCard: React.FC<PostQuery> = ({ post }) => {
   return (
     <Link href={`/posts/${post?.id}`} key={post?.id as string}>
-      <Card>
+      <div className={styles.card}>
         <h3>{post?.title} &rarr;</h3>
         <p>{post?.content?.slice(0, 30)}...</p>
         <p>{post?.author?.email}</p>
-      </Card>
+      </div>
     </Link>
   )
 }
