@@ -22,90 +22,6 @@ exports[`Home page matches snapshot 1`] = `
       <div
         class="grid"
       >
-        <p>
-          Loading...
-        </p>
-        <div
-          class="card"
-        >
-          <form>
-            
-            <div>
-              <label
-                for="title-input"
-                id="title-label"
-              >
-                Title
-                 
-              </label>
-              <br />
-              <input
-                autocomplete="title"
-                id="title-input"
-                name="title"
-                type="text"
-                value="test"
-              />
-            </div>
-            <div>
-              <label
-                for="content-input"
-                id="content-label"
-              >
-                Content
-                 
-              </label>
-              <br />
-              <input
-                autocomplete="content"
-                id="content-input"
-                name="content"
-                type="text"
-                value="test"
-              />
-            </div>
-            <button
-              type="submit"
-            >
-              Create
-            </button>
-             or
-             
-            <a
-              href="signup"
-            >
-              Sign up
-            </a>
-          </form>
-        </div>
-      </div>
-    </main>
-  </div>
-</div>
-`;
-
-exports[`Home page matches snapshot 2`] = `
-<div>
-  <div
-    class="container"
-  >
-    <main>
-      <h1
-        class="title"
-      >
-        Home Swing
-      </h1>
-      <p
-        class="description"
-      >
-        Get started by listing your home to swing.
-      </p>
-      <button>
-        Delete all
-      </button>
-      <div
-        class="grid"
-      >
         <div
           class="card"
         >
@@ -198,7 +114,7 @@ exports[`Home page matches snapshot 2`] = `
              or
              
             <a
-              href="signup"
+              href="/signup"
             >
               Sign up
             </a>
@@ -210,4 +126,4 @@ exports[`Home page matches snapshot 2`] = `
 </div>
 `;
 
-exports[`Home page matches snapshot 3`] = `<div />`;
+exports[`Home page matches snapshot 2`] = `<div />`;

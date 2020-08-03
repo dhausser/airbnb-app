@@ -6,6 +6,8 @@ import useForm from '../lib/use-form'
 import { Field } from '../components/field'
 import { getErrorMessage } from '../lib/form'
 
+import { Card } from '../shared/styles'
+
 interface Props {
   initial: {
     title: string
@@ -49,7 +51,7 @@ export const PostForm: React.FC<Props> = ({ initial }) => {
   }
 
   return (
-    <div className="card">
+    <Card>
       <form onSubmit={handleSubmit}>
         {errorMsg && <p>{errorMsg}</p>}
         <Field
@@ -75,6 +77,6 @@ export const PostForm: React.FC<Props> = ({ initial }) => {
           <a>Sign up</a>
         </Link>
       </form>
-    </div>
+    </Card>
   )
 }
