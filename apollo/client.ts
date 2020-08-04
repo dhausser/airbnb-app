@@ -11,9 +11,8 @@ function createIsomorphLink() {
     return new SchemaLink({ schema, context: createContext() })
   } else {
     const { HttpLink } = require('@apollo/client/link/http')
-    const { prodEndpoint, devEndpoint } = require('../config.json')
     return new HttpLink({
-      uri: process.env.NODE_ENV === 'production' ? prodEndpoint : devEndpoint,
+      uri: process.env.API_URL,
       credentials: 'same-origin',
     })
   }

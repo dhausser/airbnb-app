@@ -9,19 +9,19 @@
 
 export interface PostQuery_post_author {
   __typename: 'User'
-  email: string | null
+  email: string
 }
 
 export interface PostQuery_post {
   __typename: 'Post'
-  id: string | null
-  title: string | null
+  id: string
+  title: string
   content: string | null
   author: PostQuery_post_author | null
 }
 
 export interface PostQuery {
-  post: PostQuery_post | null
+  post: PostQuery_post
 }
 
 export interface PostQueryVariables {

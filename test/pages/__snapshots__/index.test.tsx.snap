@@ -2,10 +2,10 @@
 
 exports[`Home page matches snapshot 1`] = `
 <div>
-  <div
-    class="container"
-  >
-    <main>
+  <div>
+    <main
+      class="main"
+    >
       <h1
         class="title"
       >

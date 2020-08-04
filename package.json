@@ -1,8 +1,8 @@
 {
   "name": "airbnb-app",
-  "author": "dhausser",
+  "author": "Davy Hausser",
   "version": "0.1.0",
-  "license": "MIT",
+  "license": "ISC",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -56,6 +56,7 @@
     "eslint-config-prettier": "^6.10.1",
     "eslint-plugin-react": "^7.20.5",
     "husky": "^4.2.3",
+    "identity-obj-proxy": "^3.0.0",
     "jest": "^26.2.2",
     "jest-watch-typeahead": "^0.6.0",
     "lint-staged": "^10.0.10",
@@ -63,9 +64,41 @@
     "ts-node": "^8.10.2",
     "typescript": "^3.8.3"
   },
-  "peerDependencies": {},
   "resolutions": {
     "graphql": "14.7.0"
+  },
+  "babel": {
+    "presets": [
+      "next/babel"
+    ]
+  },
+  "jest": {
+    "roots": [
+      "<rootDir>"
+    ],
+    "moduleFileExtensions": [
+      "js",
+      "ts",
+      "tsx",
+      "json"
+    ],
+    "testPathIgnorePatterns": [
+      "<rootDir>[/\\\\](node_modules|.next)[/\\\\]"
+    ],
+    "transformIgnorePatterns": [
+      "[/\\\\]node_modules[/\\\\].+\\.(ts|tsx)$"
+    ],
+    "transform": {
+      "^.+\\.(ts|tsx)$": "babel-jest"
+    },
+    "watchPlugins": [
+      "jest-watch-typeahead/filename",
+      "jest-watch-typeahead/testname"
+    ],
+    "moduleNameMapper": {
+      "\\.(css|less|sass|scss)$": "identity-obj-proxy",
+      "\\.(gif|ttf|eot|svg|png)$": "<rootDir>/test/__mocks__/fileMock.js"
+    }
   },
   "prettier": "@prisma-labs/prettier-config"
 }

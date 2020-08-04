@@ -9,17 +9,17 @@
 
 export interface PostsQuery_posts_author {
   __typename: 'User'
-  email: string | null
+  email: string
 }
 
 export interface PostsQuery_posts {
   __typename: 'Post'
-  id: string | null
-  title: string | null
+  id: string
+  title: string
   content: string | null
   author: PostsQuery_posts_author | null
 }
 
 export interface PostsQuery {
-  posts: PostsQuery_posts[] | null
+  posts: PostsQuery_posts[]
 }

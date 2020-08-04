@@ -8,5 +8,5 @@
 // ====================================================
 
 export interface DeletePosts {
-  deletePosts: number | null
+  deletePosts: number
 }
