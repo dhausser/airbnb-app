@@ -12,7 +12,7 @@ function createIsomorphLink() {
   } else {
     const { HttpLink } = require('@apollo/client/link/http')
     return new HttpLink({
-      uri: process.env.API_URL,
+      uri: process.env.NEXT_PUBLIC_API_URL,
       credentials: 'same-origin',
     })
   }
