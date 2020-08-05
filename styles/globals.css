@@ -2,12 +2,11 @@
   --ifm-background-color: #f5f8f9;
   --ifm-background-color-dark: #282c34;
   --ifm-color-primary: #00ad9f;
-  /* --ifm-color-primary: #09d3ac; */
   --ifm-color-primary-dark: rgb(8, 190, 155);
   --ifm-color-primary-darker: rgb(8, 179, 146);
   --ifm-color-primary-darkest: rgb(6, 148, 120);
   --ifm-color-primary-light: rgb(46, 218, 184);
-  --ifm-color-primary-lighter: rgb(83, 224, 197);
+  --ifm-color-primary-lighter: rgba(83, 224, 198, 0.055);
   --ifm-color-primary-lightest: rgb(132, 233, 214);
   --ifm-color-secondary: #8b8b8b;
   --ifm-color-secondary-dark: #555;
