@@ -1,5 +1,25 @@
+:root {
+  --ifm-background-color: #f5f8f9;
+  --ifm-background-color-dark: #282c34;
+  --ifm-color-primary: #00ad9f;
+  /* --ifm-color-primary: #09d3ac; */
+  --ifm-color-primary-dark: rgb(8, 190, 155);
+  --ifm-color-primary-darker: rgb(8, 179, 146);
+  --ifm-color-primary-darkest: rgb(6, 148, 120);
+  --ifm-color-primary-light: rgb(46, 218, 184);
+  --ifm-color-primary-lighter: rgb(83, 224, 197);
+  --ifm-color-primary-lightest: rgb(132, 233, 214);
+  --ifm-color-secondary: #8b8b8b;
+  --ifm-color-secondary-dark: #555;
+  --ifm-button-transition-duration: 0.2s;
+  --ifm-border-radius: 4px;
+  --ifm-max-width: 300px;
+}
+
 html,
 body {
+  color: var(--ifm-color-primary);
+  background: var(--ifm-background-color-dark);
   padding: 0;
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans,
@@ -13,4 +33,38 @@ a {
 
 * {
   box-sizing: border-box;
+}
+
+button {
+  background-color: var(--ifm-color-primary);
+  color: var(--ifm-background-color);
+  border: none;
+  border-radius: var(--ifm-border-radius);
+  padding: 15px 32px;
+  margin: 10px 0px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+input {
+  width: 100%;
+  box-sizing: border-box;
+  background-color: var(--ifm-background-color-dark);
+  border: 1px solid var(--ifm-color-secondary-dark);
+  border-radius: var(--ifm-border-radius);
+  color: var(--ifm-color-primary);
+  font-size: 17px;
+  line-height: 1.5;
+  padding: 10px;
+  margin: 10px 0px;
+}
+
+input:focus {
+  border-color: inherit;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  outline: var(--ifm-color-primary-dark);
 }

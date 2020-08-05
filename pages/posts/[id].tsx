@@ -16,8 +16,12 @@ export const SinglePost: React.FC = () => {
   const { loading, error, data } = usePost(id as string)
 
   return (
-    <div className={styles.grid}>
-      <Post loading={loading} error={error} data={data} />
+    <div className={styles.container}>
+      <div className={styles.main}>
+        <div className={styles.grid}>
+          <Post loading={loading} error={error} data={data} />
+        </div>
+      </div>
     </div>
   )
 }

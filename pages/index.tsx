@@ -24,7 +24,7 @@ export const Home: React.FC = () => {
   }
 
   return (
-    <div>
+    <div className={styles.container}>
       <Head>
         <title>Airbnb App</title>
         <link rel="icon" href="/favicon.ico" />

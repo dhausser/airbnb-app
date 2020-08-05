@@ -2,7 +2,9 @@
 
 exports[`Home page matches snapshot 1`] = `
 <div>
-  <div>
+  <div
+    class="container"
+  >
     <main
       class="main"
     >
@@ -67,9 +69,7 @@ exports[`Home page matches snapshot 1`] = `
             rob@prisma.io
           </p>
         </div>
-        <div
-          class="card"
-        >
+        <div>
           <form>
             
             <div>
