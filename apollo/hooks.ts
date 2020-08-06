@@ -43,13 +43,26 @@ export const useCreateDraft = (): any => {
 }
 
 export const useDeletePosts = (): any => {
-  return useMutation<DeletePostsMutationTypes.DeletePosts>(DELETE_POSTS_MUTATION, {
+  return useMutation<DeletePostsMutationTypes.DeletePosts_deletePosts>(DELETE_POSTS_MUTATION, {
+    optimisticResponse: {
+      __typename: 'Post',
+      id: '0',
+    },
+    /**
+     * TODO: Figure out the best way to write a delete mutation optimistic response
+     */
+    // optimisticResponse: {
+    //   __typename: 'Mutation',
+    //   deletePosts: {
+    //     __typename: 'Post',
+    //     id: '0',
+    //   },
+    // },
     update(cache) {
-      cache.modify({
-        fields: {
-          posts() {
-            return []
-          },
+      cache.writeQuery({
+        query: GET_POSTS_QUERY,
+        data: {
+          posts: [],
         },
       })
     },

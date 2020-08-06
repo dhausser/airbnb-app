@@ -31,9 +31,9 @@ export const PostForm: React.FC<Props> = ({ initial }) => {
 
   // Calculate the expected ID increment for optimistic UI response
   const cache = useApolloClient()
-  const { posts } = cache.readQuery({ query: GET_POSTS_QUERY }) as PostsQueryTypes.PostsQuery
-  const array = posts.map((post) => parseInt(post.id))
-  const optimisticId = Math.max(...array) + 1
+  const data = cache.readQuery({ query: GET_POSTS_QUERY }) as PostsQueryTypes.PostsQuery
+  const array = data?.posts.map((post) => parseInt(post.id))
+  const optimisticId = array ? Math.max(...array) || 0 + 1 : 1
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>): Promise<void> {
     event.preventDefault()
@@ -56,24 +56,9 @@ export const PostForm: React.FC<Props> = ({ initial }) => {
           cache.writeQuery({
             query: GET_POSTS_QUERY,
             data: {
-              posts: [...posts, createDraft],
+              posts: [...data.posts, createDraft],
             },
           })
-          // cache.modify({
-          //   fields: {
-          //     posts(existingPosts = []) {
-          //       const newPostRef = cache.writeFragment({
-          //         data: createDraft,
-          //         fragment: gql`
-          //           fragment NewPost on Post {
-          //             id
-          //           }
-          //         `,
-          //       })
-          //       return [...existingPosts, newPostRef]
-          //     },
-          //   },
-          // })
         },
       })
     } catch (error) {

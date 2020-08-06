@@ -53,10 +53,11 @@ export const Mutation = mutationType({
       },
     })
 
-    t.field('deletePosts', {
-      type: 'Int',
+    t.list.field('deletePosts', {
+      type: 'Post',
       async resolve(_parent, _args, ctx) {
-        return (await ctx.prisma.post.deleteMany({})).count
+        const { count } = await ctx.prisma.post.deleteMany({})
+        return count ? [] : null
       },
     })
   },

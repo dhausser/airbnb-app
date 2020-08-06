@@ -29,7 +29,7 @@
     "@apollo/client": "^3.1.2",
     "@hapi/iron": "^6.0.0",
     "@nexus/schema": "^0.14.0",
-    "@prisma/client": "^2.3.0",
+    "@prisma/client": "^2.4.1",
     "apollo-server-micro": "^2.16.1",
     "graphql": "^14.7.0",
     "next": "9.5.1",
@@ -40,7 +40,7 @@
   "devDependencies": {
     "@babel/core": "^7.11.0",
     "@prisma-labs/prettier-config": "^0.1.0",
-    "@prisma/cli": "^2.3.0",
+    "@prisma/cli": "^2.4.1",
     "@testing-library/react": "^10.0.1",
     "@types/cookie": "^0.4.0",
     "@types/jest": "^26.0.8",

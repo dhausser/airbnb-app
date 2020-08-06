@@ -33,7 +33,7 @@ export interface NexusGenFieldTypes {
     // field return type
     createDraft: NexusGenRootTypes['Post'] // Post!
     createProfile: NexusGenRootTypes['Profile'] // Profile!
-    deletePosts: number // Int!
+    deletePosts: NexusGenRootTypes['Post'][] // [Post!]!
     signupUser: NexusGenRootTypes['User'] // User!
   }
   Post: {

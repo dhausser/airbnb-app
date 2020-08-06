@@ -7,6 +7,11 @@
 // GraphQL mutation operation: DeletePosts
 // ====================================================
 
+export interface DeletePosts_deletePosts {
+  __typename: 'Post'
+  id: string
+}
+
 export interface DeletePosts {
-  deletePosts: number
+  deletePosts: DeletePosts_deletePosts[]
 }
