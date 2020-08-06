@@ -11,9 +11,9 @@ import { PostForm } from '../components/post-form'
 import styles from '../styles/Home.module.css'
 
 export const Home: React.FC = () => {
+  const initial = { title: 'test', content: 'test', authorEmail: 'davy@prisma.io' }
   const { loading, error, data } = usePosts()
   const [deletePosts] = useDeletePosts()
-  const initial = { title: 'test', content: 'test', authorEmail: 'davy@prisma.io' }
 
   return (
     <div className={styles.container}>
