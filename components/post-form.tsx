@@ -1,8 +1,9 @@
 import { useState, FormEvent } from 'react'
-import { useMutation, useApolloClient, gql } from '@apollo/client'
+import { useMutation, gql } from '@apollo/client'
 import Link from 'next/link'
 
 import useForm from '../lib/use-form'
+import { CREATE_DRAFT_MUTATION } from '../apollo/mutations'
 import { Field } from '../components/field'
 import { getErrorMessage } from '../lib/form'
 
@@ -16,35 +17,46 @@ interface Props {
   }
 }
 
-const CreateDraftMutation = gql`
-  mutation CreateDraft($title: String!, $content: String!, $authorEmail: String!) {
-    createDraft(title: $title, content: $content, authorEmail: $authorEmail) {
-      id
-      title
-      content
-      author {
-        email
-      }
-    }
-  }
-`
-
 export const PostForm: React.FC<Props> = ({ initial }) => {
-  const client = useApolloClient()
-  const [createDraft] = useMutation(CreateDraftMutation)
   const [errorMsg, setErrorMsg] = useState('')
   const { inputs, handleChange } = useForm(initial)
+  const [createDraft] = useMutation(CREATE_DRAFT_MUTATION, {
+    update(cache, { data: { createDraft } }) {
+      cache.modify({
+        fields: {
+          posts(existingPosts = []) {
+            const newPostRef = cache.writeFragment({
+              data: createDraft,
+              fragment: gql`
+                fragment NewPost on Post {
+                  id
+                }
+              `,
+            })
+            return [...existingPosts, newPostRef]
+          },
+        },
+      })
+    },
+  })
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>): Promise<void> {
     event.preventDefault()
     const { title, content, authorEmail } = inputs
     try {
-      const { data } = await createDraft({
+      createDraft({
         variables: { title, content, authorEmail },
+        optimisticResponse: {
+          __typeName: 'Mutation',
+          createDraft: {
+            id: 0,
+            __typeName: 'Post',
+            title,
+            content,
+            authorEmail,
+          },
+        },
       })
-      if (data.createDraft.id) {
-        await client.resetStore()
-      }
     } catch (error) {
       setErrorMsg(getErrorMessage(error.message))
     }

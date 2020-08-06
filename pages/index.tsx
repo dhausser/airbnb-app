@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import { GetServerSideProps } from 'next'
-import { useApolloClient, ApolloClient } from '@apollo/client'
+import { ApolloClient } from '@apollo/client'
 
 import { initializeApollo } from '../apollo/client'
 import { GET_POSTS_QUERY } from '../apollo/queries'
@@ -11,17 +11,9 @@ import { PostForm } from '../components/post-form'
 import styles from '../styles/Home.module.css'
 
 export const Home: React.FC = () => {
-  const client = useApolloClient()
   const { loading, error, data } = usePosts()
   const [deletePosts] = useDeletePosts()
   const initial = { title: 'test', content: 'test', authorEmail: 'davy@prisma.io' }
-
-  async function handleDelete() {
-    const { data } = await deletePosts()
-    if (data.deletePosts) {
-      await client.resetStore()
-    }
-  }
 
   return (
     <div className={styles.container}>
@@ -35,7 +27,7 @@ export const Home: React.FC = () => {
 
         <p className={styles.description}>Get started by listing your home to swing.</p>
 
-        <button onClick={handleDelete}>Delete all</button>
+        <button onClick={deletePosts}>Delete all</button>
 
         <div className={styles.grid}>
           <Posts loading={loading} error={error} data={data} />
