@@ -1,19 +1,33 @@
 import Head from 'next/head'
+import { useRef } from 'react'
 import { GetServerSideProps } from 'next'
 import { ApolloClient } from '@apollo/client'
 
 import { initializeApollo } from '../apollo/client'
 import { GET_POSTS_QUERY } from '../apollo/queries'
 import { usePosts, useDeletePosts } from '../apollo/hooks'
-import { Posts } from '../components/posts'
 import { PostForm } from '../components/post-form'
+import { PostCard } from '../components/post-card'
+import * as PostsQueryTypes from '../__generated__/PostsQuery'
 
 import styles from '../styles/Home.module.css'
+
+type Post = PostsQueryTypes.PostsQuery_posts
 
 export const Home: React.FC = () => {
   const initial = { title: 'test', content: 'test', authorEmail: 'davy@prisma.io' }
   const { loading, error, data } = usePosts()
   const [deletePosts] = useDeletePosts()
+  const lastPostId = useRef<string>('0')
+
+  if (error) return <p>{`${error.name}: ${error.message}`}</p>
+  if (loading || !data.posts) return <p>Loading...</p>
+
+  if (data.posts.length) {
+    lastPostId.current = data.posts[data.posts.length - 1].id
+  }
+
+  console.table(data.posts)
 
   return (
     <div className={styles.container}>
@@ -30,8 +44,10 @@ export const Home: React.FC = () => {
         <button onClick={deletePosts}>Delete all</button>
 
         <div className={styles.grid}>
-          <Posts loading={loading} error={error} data={data} />
-          <PostForm initial={initial} />
+          {data.posts.map((post: Post) => (
+            <PostCard key={post.id as string} post={post} />
+          ))}
+          <PostForm initial={initial} lastPostId={lastPostId.current} />
         </div>
       </main>
     </div>

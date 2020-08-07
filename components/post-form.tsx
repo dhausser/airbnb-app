@@ -5,7 +5,7 @@ import useForm from '../lib/use-form'
 import { useCreateDraft } from '../apollo/hooks'
 import { Field } from '../components/field'
 import { getErrorMessage } from '../lib/form'
-import { useApolloClient, ApolloCache, NormalizedCacheObject } from '@apollo/client'
+import { ApolloCache, NormalizedCacheObject } from '@apollo/client'
 import { GET_POSTS_QUERY } from '../apollo/queries'
 import * as PostsQueryTypes from '../__generated__/PostsQuery'
 import * as CreateDraftMutationTypes from '../__generated__/CreateDraft'
@@ -18,22 +18,20 @@ interface Props {
     content: string
     authorEmail: string
   }
+  lastPostId: string
 }
 
 interface UpdateType {
   data: CreateDraftMutationTypes.CreateDraft
 }
 
-export const PostForm: React.FC<Props> = ({ initial }) => {
+export const PostForm: React.FC<Props> = ({ initial, lastPostId }) => {
   const [errorMsg, setErrorMsg] = useState('')
   const { inputs, handleChange } = useForm(initial)
   const [createDraft] = useCreateDraft()
+  const optimisticId = `${parseInt(lastPostId) + 1}`
 
-  // Calculate the expected ID increment for optimistic UI response
-  const cache = useApolloClient()
-  const data = cache.readQuery({ query: GET_POSTS_QUERY }) as PostsQueryTypes.PostsQuery
-  const array = data?.posts.map((post) => parseInt(post.id))
-  const optimisticId = array ? Math.max(...array) || 0 + 1 : 1
+  console.log(optimisticId)
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>): Promise<void> {
     event.preventDefault()
@@ -53,6 +51,7 @@ export const PostForm: React.FC<Props> = ({ initial }) => {
           },
         },
         update(cache: ApolloCache<NormalizedCacheObject>, { data: { createDraft } }: UpdateType) {
+          const data = cache.readQuery({ query: GET_POSTS_QUERY }) as PostsQueryTypes.PostsQuery
           cache.writeQuery({
             query: GET_POSTS_QUERY,
             data: {
