@@ -18,7 +18,7 @@ interface Props {
     content: string
     authorEmail: string
   }
-  lastPostId: string
+  lastPostId: string | null
 }
 
 interface UpdateType {
@@ -29,9 +29,7 @@ export const PostForm: React.FC<Props> = ({ initial, lastPostId }) => {
   const [errorMsg, setErrorMsg] = useState('')
   const { inputs, handleChange } = useForm(initial)
   const [createDraft] = useCreateDraft()
-  const optimisticId = `${parseInt(lastPostId) + 1}`
-
-  console.log(optimisticId)
+  const optimisticId = lastPostId ? `${parseInt(lastPostId) + 1}` : '0'
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>): Promise<void> {
     event.preventDefault()

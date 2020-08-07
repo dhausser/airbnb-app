@@ -15,10 +15,10 @@ import styles from '../styles/Home.module.css'
 type Post = PostsQueryTypes.PostsQuery_posts
 
 export const Home: React.FC = () => {
-  const initial = { title: 'test', content: 'test', authorEmail: 'davy@prisma.io' }
   const { loading, error, data } = usePosts()
   const [deletePosts] = useDeletePosts()
-  const lastPostId = useRef<string>('0')
+  const lastPostId = useRef(null)
+  const initial = { title: 'test title', content: 'test content', authorEmail: 'davy@prisma.io' }
 
   if (error) return <p>{`${error.name}: ${error.message}`}</p>
   if (loading || !data.posts) return <p>Loading...</p>
@@ -26,8 +26,6 @@ export const Home: React.FC = () => {
   if (data.posts.length) {
     lastPostId.current = data.posts[data.posts.length - 1].id
   }
-
-  console.table(data.posts)
 
   return (
     <div className={styles.container}>
