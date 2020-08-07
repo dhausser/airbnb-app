@@ -15,8 +15,6 @@ export const CREATE_DRAFT_MUTATION = gql`
 
 export const DELETE_POSTS_MUTATION = gql`
   mutation DeletePosts {
-    deletePosts {
-      id
-    }
+    deletePosts
   }
 `

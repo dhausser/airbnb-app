@@ -86,7 +86,7 @@ exports[`Home page matches snapshot 1`] = `
                 id="title-input"
                 name="title"
                 type="text"
-                value="test"
+                value="test title"
               />
             </div>
             <div>
@@ -103,7 +103,7 @@ exports[`Home page matches snapshot 1`] = `
                 id="content-input"
                 name="content"
                 type="text"
-                value="test"
+                value="test content"
               />
             </div>
             <button

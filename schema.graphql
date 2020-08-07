@@ -5,7 +5,7 @@
 type Mutation {
   createDraft(authorEmail: String, content: String, title: String!): Post!
   createProfile(bio: String, userEmail: String): Profile!
-  deletePosts: [Post!]!
+  deletePosts: Int!
   signupUser(email: String!, name: String): User!
 }
 
