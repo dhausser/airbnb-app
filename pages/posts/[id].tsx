@@ -6,6 +6,7 @@ import { initializeApollo } from '../../apollo/client'
 import { GET_POST_QUERY } from '../../apollo/queries'
 import { usePost } from '../../apollo/hooks'
 import { Post } from '../../components/post'
+import * as PostQueryTypes from '../../__generated__/PostQuery'
 
 import styles from '../../styles/Home.module.css'
 
@@ -15,11 +16,14 @@ export const SinglePost: React.FC = () => {
 
   const { loading, error, data } = usePost(id as string)
 
+  /**
+   * TODO: Figure out root cause of the type issue in Post props data
+   */
   return (
     <div className={styles.container}>
       <div className={styles.main}>
         <div className={styles.grid}>
-          <Post loading={loading} error={error} data={data} />
+          <Post loading={loading} error={error} data={data as PostQueryTypes.PostQuery} />
         </div>
       </div>
     </div>

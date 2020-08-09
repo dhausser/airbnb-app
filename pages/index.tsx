@@ -17,11 +17,11 @@ type Post = PostsQueryTypes.PostsQuery_posts
 export const Home: React.FC = () => {
   const { loading, error, data } = usePosts()
   const [deletePosts] = useDeletePosts()
-  const lastPostId = useRef(null)
+  const lastPostId = useRef<string>()
   const initial = { title: 'test title', content: 'test content', authorEmail: 'davy@prisma.io' }
 
   if (error) return <p>{`${error.name}: ${error.message}`}</p>
-  if (loading || !data.posts) return <p>Loading...</p>
+  if (loading || !data?.posts) return <p>Loading...</p>
 
   if (data.posts.length) {
     lastPostId.current = data.posts[data.posts.length - 1].id
@@ -39,7 +39,7 @@ export const Home: React.FC = () => {
 
         <p className={styles.description}>Get started by listing your home to swing.</p>
 
-        <button onClick={deletePosts}>Delete all</button>
+        <button onClick={() => deletePosts()}>Delete all</button>
 
         <div className={styles.grid}>
           {data.posts.map((post: Post) => (

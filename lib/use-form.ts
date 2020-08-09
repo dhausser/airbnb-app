@@ -1,6 +1,6 @@
 import { useState, ChangeEvent } from 'react'
 
-type Inputs = Record<string, string | undefined>
+type Inputs = Record<string, string>
 type Event = ChangeEvent<HTMLInputElement>
 type Form = {
   inputs: Inputs

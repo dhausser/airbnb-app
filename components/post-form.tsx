@@ -5,7 +5,6 @@ import useForm from '../lib/use-form'
 import { useCreateDraft } from '../apollo/hooks'
 import { Field } from '../components/field'
 import { getErrorMessage } from '../lib/form'
-import { ApolloCache, NormalizedCacheObject } from '@apollo/client'
 import { GET_POSTS_QUERY } from '../apollo/queries'
 import * as PostsQueryTypes from '../__generated__/PostsQuery'
 import * as CreateDraftMutationTypes from '../__generated__/CreateDraft'
@@ -18,7 +17,7 @@ interface Props {
     content: string
     authorEmail: string
   }
-  lastPostId: string | null
+  lastPostId: string | undefined
 }
 
 interface UpdateType {
@@ -39,16 +38,21 @@ export const PostForm: React.FC<Props> = ({ initial, lastPostId }) => {
       createDraft({
         variables: { title, content, authorEmail },
         optimisticResponse: {
-          __typeName: 'Mutation',
           createDraft: {
-            __typeName: 'Post',
+            __typename: 'Post',
             id: optimisticId,
             title,
             content,
-            author: { email: authorEmail },
+            author: {
+              __typename: 'User',
+              email: authorEmail,
+            },
           },
         },
-        update(cache: ApolloCache<NormalizedCacheObject>, { data: { createDraft } }: UpdateType) {
+        /**
+         * TODO: Figure out correct type safety for data : { createDraft }
+         */
+        update(cache, { data: { createDraft } }: any) {
           const data = cache.readQuery({ query: GET_POSTS_QUERY }) as PostsQueryTypes.PostsQuery
           cache.writeQuery({
             query: GET_POSTS_QUERY,
