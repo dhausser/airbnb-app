@@ -8,10 +8,10 @@ export const Profile = objectType({
     t.field('user', {
       type: 'User',
       nullable: true,
-      resolve(parent, _args, ctx) {
+      resolve(root, _args, ctx) {
         return ctx.prisma.profile
           .findOne({
-            where: { id: parent.id },
+            where: { id: root.id },
           })
           .user()
       },

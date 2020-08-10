@@ -9,10 +9,10 @@ export const Post = objectType({
     t.field('author', {
       type: 'User',
       nullable: true,
-      resolve(parent, _args, ctx) {
+      resolve(root, _args, ctx) {
         return ctx.prisma.post
           .findOne({
-            where: { id: parent.id },
+            where: { id: root.id },
           })
           .author()
       },
