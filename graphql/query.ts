@@ -12,6 +12,28 @@ export const Query = queryType({
           where: { id: Number(id) },
           include: { author: true },
         })
+        // const post = await ctx.prisma.post.findOne({
+        //   where: { id: Number(id) },
+        //   include: { author: true },
+        // })
+        // return new Promise((resolve) => {
+        //   resolve(post)
+        // })
+        // if (post) {
+        //   return post
+        // }
+        // return new Promise((resolve) =>
+        //   resolve({
+        //     __typename: 'Post',
+        //     id: 0,
+        //     title: 'Hello world',
+        //     content: 'Hello content world',
+        //     author: {
+        //       email: 'alice@prisma.io',
+        //     },
+        //     published: false,
+        //   })
+        // )
       },
     })
 
