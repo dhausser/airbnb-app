@@ -7,12 +7,14 @@ import * as PostsQueryTypes from '../__generated__/PostsQuery'
 import * as CreateDraftMutationTypes from '../__generated__/CreateDraft'
 import * as DeletePostsMutationTypes from '../__generated__/DeletePosts'
 
+type ParsedUrlQuery = string | string[] | undefined
+
 export const usePosts = (): QueryResult<PostsQueryTypes.PostsQuery, Record<string, any>> => {
   return useQuery<PostsQueryTypes.PostsQuery>(GET_POSTS_QUERY)
 }
 
 export const usePost = (
-  id: string | string[] | undefined
+  id: ParsedUrlQuery
 ): QueryResult<PostQueryTypes.PostQuery, PostQueryTypes.PostQueryVariables> => {
   return useQuery<PostQueryTypes.PostQuery, PostQueryTypes.PostQueryVariables>(GET_POST_QUERY, {
     variables: { id: id as string },
