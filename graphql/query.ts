@@ -7,7 +7,7 @@ export const Query = queryType({
       args: {
         id: idArg(),
       },
-      async resolve(_parent, args, ctx) {
+      async resolve(_root, args, ctx) {
         const result = await ctx.prisma.post.findOne({
           where: { id: Number(args.id) },
           include: { author: true },
@@ -21,7 +21,7 @@ export const Query = queryType({
 
     t.list.field('posts', {
       type: 'Post',
-      resolve(_parent, _args, ctx) {
+      resolve(_root, _args, ctx) {
         return ctx.prisma.post.findMany({
           include: { author: true },
         })
@@ -30,7 +30,7 @@ export const Query = queryType({
 
     t.list.field('users', {
       type: 'User',
-      resolve(_parent, _args, ctx) {
+      resolve(_root, _args, ctx) {
         return ctx.prisma.user.findMany({
           include: {
             posts: true,
@@ -42,7 +42,7 @@ export const Query = queryType({
 
     t.list.field('profiles', {
       type: 'Profile',
-      resolve(_parent, _args, ctx) {
+      resolve(_root, _args, ctx) {
         return ctx.prisma.profile.findMany({
           include: {
             user: true,

@@ -9,7 +9,7 @@ export const Mutation = mutationType({
         content: stringArg(),
         authorEmail: stringArg(),
       },
-      resolve(_parent, args, ctx) {
+      resolve(_root, args, ctx) {
         return ctx.prisma.post.create({
           data: {
             title: args.title,
@@ -28,7 +28,7 @@ export const Mutation = mutationType({
         name: stringArg(),
         email: stringArg({ nullable: false }),
       },
-      resolve(_parent, { email, name }, ctx) {
+      resolve(_root, { email, name }, ctx) {
         return ctx.prisma.user.create({
           data: { email, name },
         })
@@ -41,7 +41,7 @@ export const Mutation = mutationType({
         bio: stringArg(),
         userEmail: stringArg(),
       },
-      resolve(_parent, { bio, userEmail }, ctx) {
+      resolve(_root, { bio, userEmail }, ctx) {
         return ctx.prisma.profile.create({
           data: {
             bio,
@@ -55,7 +55,7 @@ export const Mutation = mutationType({
 
     t.field('deletePosts', {
       type: 'Int',
-      async resolve(_parent, _args, ctx) {
+      async resolve(_root, _args, ctx) {
         const { count } = await ctx.prisma.post.deleteMany({})
         return count
       },
