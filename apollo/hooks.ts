@@ -7,27 +7,30 @@ import * as PostsQueryTypes from '../__generated__/PostsQuery'
 import * as CreateDraftMutationTypes from '../__generated__/CreateDraft'
 import * as DeletePostsMutationTypes from '../__generated__/DeletePosts'
 
-export const usePosts = (): QueryResult<PostsQueryTypes.PostsQuery, Record<string, any>> =>
-  useQuery<PostsQueryTypes.PostsQuery>(GET_POSTS_QUERY)
+export const usePosts = (): QueryResult<PostsQueryTypes.PostsQuery, Record<string, any>> => {
+  return useQuery<PostsQueryTypes.PostsQuery>(GET_POSTS_QUERY)
+}
 
 export const usePost = (
-  id: string | string[]
-): QueryResult<PostQueryTypes.PostQuery, PostQueryTypes.PostQueryVariables> =>
-  useQuery<PostQueryTypes.PostQuery, PostQueryTypes.PostQueryVariables>(GET_POST_QUERY, {
+  id: string | string[] | undefined
+): QueryResult<PostQueryTypes.PostQuery, PostQueryTypes.PostQueryVariables> => {
+  return useQuery<PostQueryTypes.PostQuery, PostQueryTypes.PostQueryVariables>(GET_POST_QUERY, {
     variables: { id: id as string },
   })
+}
 
-// export const useCreateDraft = () => {
 export const useCreateDraft = (): MutationTuple<
   CreateDraftMutationTypes.CreateDraft,
   Record<string, any>
 > => {
-  return useMutation(CREATE_DRAFT_MUTATION)
-  // return useMutation<CreateDraftMutationTypes.CreateDraft>(CREATE_DRAFT_MUTATION)
+  return useMutation<CreateDraftMutationTypes.CreateDraft>(CREATE_DRAFT_MUTATION)
 }
 
-export const useDeletePosts = (): MutationTuple<DeletePostsMutationTypes.DeletePosts, Record<string, any>> =>
-  useMutation<DeletePostsMutationTypes.DeletePosts>(DELETE_POSTS_MUTATION, {
+export const useDeletePosts = (): MutationTuple<
+  DeletePostsMutationTypes.DeletePosts,
+  Record<string, any>
+> => {
+  return useMutation<DeletePostsMutationTypes.DeletePosts>(DELETE_POSTS_MUTATION, {
     optimisticResponse: {
       deletePosts: 0,
     },
@@ -40,3 +43,4 @@ export const useDeletePosts = (): MutationTuple<DeletePostsMutationTypes.DeleteP
       })
     },
   })
+}
