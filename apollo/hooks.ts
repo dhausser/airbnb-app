@@ -17,8 +17,14 @@ export const usePost = (
     variables: { id: id as string },
   })
 
-export const useCreateDraft = (): MutationTuple<CreateDraftMutationTypes.CreateDraft, Record<string, any>> =>
-  useMutation<CreateDraftMutationTypes.CreateDraft>(CREATE_DRAFT_MUTATION)
+// export const useCreateDraft = () => {
+export const useCreateDraft = (): MutationTuple<
+  CreateDraftMutationTypes.CreateDraft,
+  Record<string, any>
+> => {
+  return useMutation(CREATE_DRAFT_MUTATION)
+  // return useMutation<CreateDraftMutationTypes.CreateDraft>(CREATE_DRAFT_MUTATION)
+}
 
 export const useDeletePosts = (): MutationTuple<DeletePostsMutationTypes.DeletePosts, Record<string, any>> =>
   useMutation<DeletePostsMutationTypes.DeletePosts>(DELETE_POSTS_MUTATION, {

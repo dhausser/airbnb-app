@@ -7,9 +7,8 @@ import { Field } from '../components/field'
 import { getErrorMessage } from '../lib/form'
 import { GET_POSTS_QUERY } from '../apollo/queries'
 import * as PostsQueryTypes from '../__generated__/PostsQuery'
-import * as CreateDraftMutationTypes from '../__generated__/CreateDraft'
 
-// import styles from '../styles/Home.module.css'
+import styles from '../styles/Home.module.css'
 
 interface Props {
   initial: {
@@ -18,10 +17,6 @@ interface Props {
     authorEmail: string
   }
   lastPostId: string | undefined
-}
-
-interface UpdateType {
-  data: CreateDraftMutationTypes.CreateDraft
 }
 
 export const PostForm: React.FC<Props> = ({ initial, lastPostId }) => {
@@ -49,15 +44,14 @@ export const PostForm: React.FC<Props> = ({ initial, lastPostId }) => {
             },
           },
         },
-        /**
-         * TODO: Figure out correct type safety for data : { createDraft }
-         */
-        update(cache, { data: { createDraft } }: any) {
-          const data = cache.readQuery({ query: GET_POSTS_QUERY }) as PostsQueryTypes.PostsQuery
+        update(cache, { data }) {
+          const current = cache.readQuery<PostsQueryTypes.PostsQuery>({ query: GET_POSTS_QUERY }) || {
+            posts: [],
+          }
           cache.writeQuery({
             query: GET_POSTS_QUERY,
             data: {
-              posts: [...data.posts, createDraft],
+              posts: [...current.posts, data?.createDraft],
             },
           })
         },
@@ -68,7 +62,7 @@ export const PostForm: React.FC<Props> = ({ initial, lastPostId }) => {
   }
 
   return (
-    <div>
+    <div className={styles.card}>
       <form onSubmit={handleSubmit}>
         {errorMsg && <p>{errorMsg}</p>}
         <Field
