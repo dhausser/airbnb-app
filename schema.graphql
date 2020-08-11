@@ -2,10 +2,17 @@
 ### Do not make changes to this file directly
 
 type Mutation {
-  createDraft(authorEmail: String, content: String, title: String!): Post!
-  createProfile(bio: String, userEmail: String): Profile!
+  createDraft(authorEmail: String!, content: String, title: String!): Post!
+  createProfile(bio: String, userEmail: String!): Profile!
+  deletePost(id: ID): Post!
   deletePosts: Int!
   signupUser(email: String!, name: String): User!
+  updateDraft(
+    authorEmail: String!
+    content: String
+    id: ID!
+    title: String!
+  ): Post!
 }
 
 type Post {
