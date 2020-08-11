@@ -1,10 +1,17 @@
 import { useQuery, useMutation, MutationTuple, QueryResult } from '@apollo/client'
 import { GET_POSTS_QUERY, GET_POST_QUERY } from './queries'
-import { CREATE_DRAFT_MUTATION, DELETE_POSTS_MUTATION } from './mutations'
+import {
+  CREATE_DRAFT_MUTATION,
+  UPDATE_POST_MUTATION,
+  DELETE_POST_MUTATION,
+  DELETE_POSTS_MUTATION,
+} from './mutations'
 
 import * as PostQueryTypes from '../__generated__/PostQuery'
 import * as PostsQueryTypes from '../__generated__/PostsQuery'
 import * as CreateDraftMutationTypes from '../__generated__/CreateDraft'
+import * as UpdatePostMutationTypes from '../__generated__/UpdatePost'
+import * as DeletePostMutationTypes from '../__generated__/DeletePost'
 import * as DeletePostsMutationTypes from '../__generated__/DeletePosts'
 
 type ParsedUrlQuery = string | string[] | undefined
@@ -26,6 +33,42 @@ export const useCreateDraft = (): MutationTuple<
   Record<string, any>
 > => {
   return useMutation<CreateDraftMutationTypes.CreateDraft>(CREATE_DRAFT_MUTATION)
+}
+
+export const useUpdatePost = ({
+  id,
+  title,
+  content,
+  authorEmail,
+}: UpdatePostMutationTypes.UpdatePostVariables): MutationTuple<
+  UpdatePostMutationTypes.UpdatePost,
+  UpdatePostMutationTypes.UpdatePostVariables
+> => {
+  return useMutation<UpdatePostMutationTypes.UpdatePost, UpdatePostMutationTypes.UpdatePostVariables>(
+    UPDATE_POST_MUTATION,
+    {
+      variables: {
+        id,
+        title,
+        content,
+        authorEmail,
+      },
+    }
+  )
+}
+
+export const useDeletePost = ({
+  id,
+}: DeletePostMutationTypes.DeletePostVariables): MutationTuple<
+  DeletePostMutationTypes.DeletePost,
+  DeletePostMutationTypes.DeletePostVariables
+> => {
+  return useMutation<DeletePostMutationTypes.DeletePost, DeletePostMutationTypes.DeletePostVariables>(
+    DELETE_POST_MUTATION,
+    {
+      variables: { id },
+    }
+  )
 }
 
 export const useDeletePosts = (): MutationTuple<

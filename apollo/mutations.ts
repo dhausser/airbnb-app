@@ -13,6 +13,38 @@ export const CREATE_DRAFT_MUTATION = gql`
   }
 `
 
+export const UPDATE_POST_MUTATION = gql`
+  mutation UpdatePost($id: ID!, $title: String!, $content: String, $authorEmail: String!) {
+    updateDraft(id: $id, title: $title, content: $content, authorEmail: $authorEmail) {
+      id
+      title
+      content
+      author {
+        id
+        email
+        name
+      }
+      published
+    }
+  }
+`
+
+export const DELETE_POST_MUTATION = gql`
+  mutation DeletePost($id: ID!) {
+    deletePost(id: $id) {
+      id
+      title
+      content
+      author {
+        id
+        email
+        name
+      }
+      published
+    }
+  }
+`
+
 export const DELETE_POSTS_MUTATION = gql`
   mutation DeletePosts {
     deletePosts
