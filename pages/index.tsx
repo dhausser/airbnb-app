@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import { useRef } from 'react'
 import { GetServerSideProps } from 'next'
-import { ApolloClient } from '@apollo/client'
+import { ApolloClient, NormalizedCacheObject } from '@apollo/client'
 
 import { initializeApollo } from '../apollo/client'
 import { GET_POSTS_QUERY } from '../apollo/queries'
@@ -53,7 +53,7 @@ export const Home: React.FC = () => {
 }
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  const apolloClient: ApolloClient<unknown> = initializeApollo()
+  const apolloClient: ApolloClient<NormalizedCacheObject | null> = initializeApollo()
 
   await apolloClient.query({
     query: GET_POSTS_QUERY,

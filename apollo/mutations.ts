@@ -14,16 +14,11 @@ export const CREATE_DRAFT_MUTATION = gql`
 `
 
 export const UPDATE_POST_MUTATION = gql`
-  mutation UpdatePost($id: ID!, $title: String!, $content: String, $authorEmail: String!) {
-    updateDraft(id: $id, title: $title, content: $content, authorEmail: $authorEmail) {
+  mutation UpdatePost($id: ID!, $title: String!, $content: String) {
+    updateDraft(id: $id, title: $title, content: $content) {
       id
       title
       content
-      author {
-        id
-        email
-        name
-      }
       published
     }
   }

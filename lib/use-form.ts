@@ -4,6 +4,7 @@ type Inputs = Record<string, string>
 type Event = ChangeEvent<HTMLInputElement>
 type Form = {
   inputs: Inputs
+  // setInputs: Dispatch<SetStateAction<Inputs>>
   handleChange: (event: Event) => void
   resetForm: () => void
   clearForm: () => void
@@ -28,6 +29,7 @@ export default function useForm(initial = {}): Form {
 
   return {
     inputs,
+    // setInputs,
     handleChange,
     resetForm,
     clearForm,

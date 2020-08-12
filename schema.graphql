@@ -7,12 +7,7 @@ type Mutation {
   deletePost(id: ID): Post!
   deletePosts: Int!
   signupUser(email: String!, name: String): User!
-  updateDraft(
-    authorEmail: String!
-    content: String
-    id: ID!
-    title: String!
-  ): Post!
+  updateDraft(content: String, id: ID!, title: String!): Post!
 }
 
 type Post {

@@ -7,19 +7,11 @@
 // GraphQL mutation operation: UpdatePost
 // ====================================================
 
-export interface UpdatePost_updateDraft_author {
-  __typename: 'User'
-  id: string
-  email: string
-  name: string | null
-}
-
 export interface UpdatePost_updateDraft {
   __typename: 'Post'
   id: string
   title: string
   content: string | null
-  author: UpdatePost_updateDraft_author
   published: boolean
 }
 
@@ -31,5 +23,4 @@ export interface UpdatePostVariables {
   id: string
   title: string
   content?: string | null
-  authorEmail: string
 }

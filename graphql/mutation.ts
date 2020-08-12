@@ -61,18 +61,14 @@ export const Mutation = mutationType({
         id: idArg({ nullable: false }),
         title: stringArg({ nullable: false }),
         content: stringArg(),
-        authorEmail: stringArg({ nullable: false }),
       },
-      async resolve(_root, { id, title, content, authorEmail }, ctx) {
+      async resolve(_root, { id, title, content }, ctx) {
         const result = await ctx.prisma.post.update({
           where: { id: Number(id) },
           include: { author: true },
           data: {
-            title: title,
-            content: content,
-            author: {
-              connect: { email: authorEmail },
-            },
+            title,
+            content,
           },
         })
         if (result === null) {

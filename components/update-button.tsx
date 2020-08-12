@@ -6,12 +6,7 @@ import { getErrorMessage } from '../lib/form'
 import { UPDATE_POST_MUTATION } from '../apollo/mutations'
 import * as UpdatePostTypes from '../__generated__/UpdatePost'
 
-export const UpdateDraftButton: React.FC<UpdatePostTypes.UpdatePostVariables> = ({
-  id,
-  title,
-  content,
-  authorEmail,
-}) => {
+export const UpdateDraftButton: React.FC<UpdatePostTypes.UpdatePostVariables> = ({ id, title, content }) => {
   const [errorMsg, setErrorMsg] = useState<string>()
   const router = useRouter()
   const [mutate, { loading, error }] = useMutation<
@@ -22,7 +17,6 @@ export const UpdateDraftButton: React.FC<UpdatePostTypes.UpdatePostVariables> = 
       id,
       title,
       content,
-      authorEmail,
     },
     update(cache) {
       cache.modify({
@@ -34,9 +28,6 @@ export const UpdateDraftButton: React.FC<UpdatePostTypes.UpdatePostVariables> = 
           content() {
             return content
           },
-          author(existingAuthor) {
-            return { email: authorEmail, ...existingAuthor }
-          },
         },
       })
     },
@@ -46,12 +37,6 @@ export const UpdateDraftButton: React.FC<UpdatePostTypes.UpdatePostVariables> = 
         id,
         title,
         content: content || '',
-        author: {
-          __typename: 'User',
-          id: '',
-          name: '',
-          email: authorEmail,
-        },
         published: false,
       },
     },
