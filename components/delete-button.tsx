@@ -3,10 +3,12 @@ import { useRouter } from 'next/router'
 import { useMutation } from '@apollo/client'
 
 import { getErrorMessage } from '../lib/form'
-// import { GET_POSTS_QUERY } from '../apollo/queries'
 import { DELETE_POST_MUTATION } from '../apollo/mutations'
 import * as DeletePostTypes from '../__generated__/DeletePost'
-// import * as PostsQueryTypes from '../__generated__/PostsQuery'
+
+/**
+ * TODO: Avoid rerender of post page after delete mutation is complete as it results in an error
+ */
 
 export const DeleteDraftButton: React.FC<DeletePostTypes.DeletePostVariables> = ({ id }) => {
   const [errorMsg, setErrorMsg] = useState<string>()
@@ -18,31 +20,14 @@ export const DeleteDraftButton: React.FC<DeletePostTypes.DeletePostVariables> = 
     variables: {
       id,
     },
-    // update(cache, { data }) {
-    //   const current = cache.readQuery<PostsQueryTypes.PostsQuery>({ query: GET_POSTS_QUERY }) || {
-    //     posts: [],
-    //   }
-    //   cache.writeQuery({
-    //     query: GET_POSTS_QUERY,
-    //     data: {
-    //       posts: current.posts.filter((post) => post.id === data?.deletePost.id),
-    //     },
-    //   })
-    // },
-    // optimisticResponse: {
-    //   deletePost: {
-    //     __typename: 'Post',
-    //     id
-    //   }
-    // },
+    onCompleted() {
+      router.push('/')
+    },
   })
 
   async function handleDelete() {
     try {
-      const { data } = await mutate()
-      if (data?.deletePost.id) {
-        router.push('/')
-      }
+      await mutate()
     } catch (error) {
       setErrorMsg(getErrorMessage(error))
     }
