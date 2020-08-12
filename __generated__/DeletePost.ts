@@ -19,7 +19,7 @@ export interface DeletePost_deletePost {
   id: string
   title: string
   content: string | null
-  author: DeletePost_deletePost_author | null
+  author: DeletePost_deletePost_author
   published: boolean
 }
 

@@ -17,7 +17,7 @@ export interface PostsQuery_posts {
   id: string
   title: string
   content: string | null
-  author: PostsQuery_posts_author | null
+  author: PostsQuery_posts_author
 }
 
 export interface PostsQuery {

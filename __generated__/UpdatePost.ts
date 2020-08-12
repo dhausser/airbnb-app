@@ -19,7 +19,7 @@ export interface UpdatePost_updateDraft {
   id: string
   title: string
   content: string | null
-  author: UpdatePost_updateDraft_author | null
+  author: UpdatePost_updateDraft_author
   published: boolean
 }
 

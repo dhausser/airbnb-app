@@ -95,7 +95,6 @@ export const Mutation = mutationType({
         if (result === null) {
           throw new Error(`No post with id "${id}"`)
         }
-        console.log(result)
         return result
       },
     })

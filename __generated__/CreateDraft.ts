@@ -17,7 +17,7 @@ export interface CreateDraft_createDraft {
   id: string
   title: string
   content: string | null
-  author: CreateDraft_createDraft_author | null
+  author: CreateDraft_createDraft_author
 }
 
 export interface CreateDraft {

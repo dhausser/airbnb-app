@@ -6,23 +6,10 @@ export const User = objectType({
     t.id('id')
     t.string('email')
     t.string('name', { nullable: true })
-    t.list.field('posts', {
-      type: 'Post',
-      nullable: true,
-      resolve(root, _args, ctx) {
-        return ctx.prisma.post.findMany({
-          where: { authorId: Number(root.id) },
-        })
-      },
-    })
+    t.list.field('posts', { type: 'Post' })
     t.field('profile', {
       type: 'Profile',
       nullable: true,
-      resolve(root, _args, ctx) {
-        return ctx.prisma.profile.findOne({
-          where: { userId: Number(root.id) },
-        })
-      },
     })
   },
 })

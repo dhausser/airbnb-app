@@ -16,7 +16,7 @@ type Mutation {
 }
 
 type Post {
-  author: User
+  author: User!
   content: String
   id: ID!
   published: Boolean!
@@ -26,7 +26,7 @@ type Post {
 type Profile {
   bio: String
   id: ID!
-  user: User
+  user: User!
 }
 
 type Query {
@@ -40,6 +40,6 @@ type User {
   email: String!
   id: ID!
   name: String
-  posts: [Post!]
+  posts: [Post!]!
   profile: Profile
 }
