@@ -2,11 +2,12 @@ import { GetServerSideProps } from 'next'
 import { useRouter } from 'next/router'
 import { ApolloClient, NormalizedCacheObject } from '@apollo/client'
 
-import { initializeApollo } from '../../apollo/client'
-import { GET_POST_QUERY } from '../../apollo/queries'
 import { usePost } from '../../apollo/hooks'
+import { GET_POST_QUERY } from '../../apollo/queries'
+import { initializeApollo } from '../../apollo/client'
 import { PostForm } from '../../components/post-form'
-import { UpdateDraftButton, DeleteDraftButton } from '../../components/action-button'
+import { UpdateDraftButton } from '../../components/update-button'
+import { DeleteDraftButton } from '../../components/delete-button'
 
 import styles from '../../styles/Home.module.css'
 
