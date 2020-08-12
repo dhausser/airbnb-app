@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, FormEvent } from 'react'
 import { useRouter } from 'next/router'
 import { useMutation, useQuery } from '@apollo/client'
 import { GetServerSideProps } from 'next'
@@ -12,13 +12,9 @@ import { DeleteDraftButton } from '../../components/delete-button'
 import { UPDATE_POST_MUTATION } from '../../apollo/mutations'
 import * as UpdatePostTypes from '../../__generated__/UpdatePost'
 import styles from '../../styles/Home.module.css'
-import { FormEvent } from 'react'
-import { Post, User } from '@prisma/client'
 import * as PostQueryTypes from '../../__generated__/PostQuery'
 
-type Props = { post: Post & { author: User } }
-
-export const SinglePost: React.FC<Props> = () => {
+export const SinglePost: React.FC = () => {
   const router = useRouter()
   const { id } = router.query
   const [errorMsg, setErrorMsg] = useState<string>()

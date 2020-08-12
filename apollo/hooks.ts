@@ -39,7 +39,6 @@ export const useUpdatePost = ({
   id,
   title,
   content,
-  authorEmail,
 }: UpdatePostMutationTypes.UpdatePostVariables): MutationTuple<
   UpdatePostMutationTypes.UpdatePost,
   UpdatePostMutationTypes.UpdatePostVariables
@@ -51,7 +50,6 @@ export const useUpdatePost = ({
         id,
         title,
         content,
-        authorEmail,
       },
     }
   )
