@@ -5,7 +5,7 @@ import { ApolloClient, NormalizedCacheObject } from '@apollo/client'
 import { initializeApollo } from '../../apollo/client'
 import { GET_POST_QUERY } from '../../apollo/queries'
 import { usePost } from '../../apollo/hooks'
-import { PostCard } from '../../components/post-card'
+import { PostForm } from '../../components/post-form'
 import { UpdateDraftButton, DeleteDraftButton } from '../../components/action-button'
 
 import styles from '../../styles/Home.module.css'
@@ -18,11 +18,17 @@ export const SinglePost: React.FC = () => {
   if (error) return <p>{`${error.name}: ${error.message}`}</p>
   if (loading || !data) return <p>Loading...</p>
 
+  const {
+    title,
+    content,
+    author: { email: authorEmail },
+  } = data.post
+
   return (
     <div className={styles.container}>
       <div className={styles.main}>
         <div className={styles.grid}>
-          <PostCard post={data.post} />
+          <PostForm initial={{ title, content: content as string, authorEmail }} />
           <UpdateDraftButton
             id={data.post.id}
             title={data.post.title}

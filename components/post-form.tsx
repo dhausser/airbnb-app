@@ -16,7 +16,7 @@ interface Props {
     content: string
     authorEmail: string
   }
-  lastPostId: string | undefined
+  lastPostId?: string | undefined
 }
 
 export const PostForm: React.FC<Props> = ({ initial, lastPostId }) => {
