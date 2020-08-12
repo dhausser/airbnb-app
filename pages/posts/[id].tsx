@@ -52,6 +52,9 @@ export const SinglePost: React.FC<Props> = () => {
         },
       })
     },
+    onCompleted() {
+      router.push('/')
+    },
     optimisticResponse: {
       updateDraft: {
         __typename: 'Post',
@@ -67,10 +70,7 @@ export const SinglePost: React.FC<Props> = () => {
     event.preventDefault()
 
     try {
-      const { data } = await mutate()
-      if (data?.updateDraft.id) {
-        router.push('/')
-      }
+      await mutate()
     } catch (error) {
       setErrorMsg(getErrorMessage(error))
     }

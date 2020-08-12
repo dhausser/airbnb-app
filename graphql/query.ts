@@ -23,6 +23,7 @@ export const Query = queryType({
       type: 'Post',
       resolve(_root, _args, ctx) {
         return ctx.prisma.post.findMany({
+          orderBy: { id: 'asc' },
           include: { author: true },
         })
       },
