@@ -14,18 +14,62 @@ exports[`Single post page matches snapshot 1`] = `
         <div
           class="card"
         >
-          <h3>
-            Hello World
-             →
-          </h3>
-          <p>
-            This is the hello world conten
-            ...
-          </p>
-          <p>
-            alice@prisma.io
-          </p>
+          <form>
+            
+            <div>
+              <label
+                for="title-input"
+                id="title-label"
+              >
+                Title
+                 
+              </label>
+              <br />
+              <input
+                autocomplete="title"
+                id="title-input"
+                name="title"
+                type="text"
+                value="Hello World"
+              />
+            </div>
+            <div>
+              <label
+                for="content-input"
+                id="content-label"
+              >
+                Content
+                 
+              </label>
+              <br />
+              <input
+                autocomplete="content"
+                id="content-input"
+                name="content"
+                type="text"
+                value="This is the hello world content"
+              />
+            </div>
+            <button
+              type="submit"
+            >
+              Create
+            </button>
+             or
+             
+            <a
+              href="/signup"
+            >
+              Sign up
+            </a>
+          </form>
         </div>
+        <button>
+          Update
+        </button>
+        <button>
+          Delete
+        </button>
       </div>
     </div>
   </div>
