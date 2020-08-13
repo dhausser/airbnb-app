@@ -1,6 +1,6 @@
 import { useState, FormEvent } from 'react'
 import { useRouter } from 'next/router'
-import { useMutation, useQuery } from '@apollo/client'
+import { useQuery } from '@apollo/client'
 import { GetServerSideProps } from 'next'
 import { ApolloClient, NormalizedCacheObject } from '@apollo/client'
 import useForm from '../../lib/use-form'
@@ -9,10 +9,9 @@ import { GET_POST_QUERY } from '../../apollo/queries'
 import { initializeApollo } from '../../apollo/client'
 import { getErrorMessage } from '../../lib/form'
 import { DeleteDraftButton } from '../../components/delete-button'
-import { UPDATE_POST_MUTATION } from '../../apollo/mutations'
-import * as UpdatePostTypes from '../../__generated__/UpdatePost'
 import styles from '../../styles/Home.module.css'
 import * as PostQueryTypes from '../../__generated__/PostQuery'
+import { useUpdatePost } from '../../apollo/hooks'
 
 export const SinglePost: React.FC = () => {
   const router = useRouter()
@@ -25,42 +24,7 @@ export const SinglePost: React.FC = () => {
     }
   )
   const { inputs, handleChange } = useForm({ title: data?.post.title, content: data?.post.content })
-
-  const [mutate, { loading: loadingMutate, error: errorMutate }] = useMutation<
-    UpdatePostTypes.UpdatePost,
-    UpdatePostTypes.UpdatePostVariables
-  >(UPDATE_POST_MUTATION, {
-    variables: {
-      id: `${id}`,
-      title: inputs.title,
-      content: inputs.content,
-    },
-    update(cache) {
-      cache.modify({
-        id: `Post:${id}`,
-        fields: {
-          title() {
-            return inputs.title
-          },
-          content() {
-            return inputs.content
-          },
-        },
-      })
-    },
-    onCompleted() {
-      router.push('/')
-    },
-    optimisticResponse: {
-      updateDraft: {
-        __typename: 'Post',
-        id: `${id}`,
-        title: inputs.title,
-        content: inputs.content,
-        published: false,
-      },
-    },
-  })
+  const [mutate, { loading: loadingMutate, error: errorMutate }] = useUpdatePost(id, inputs)
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
