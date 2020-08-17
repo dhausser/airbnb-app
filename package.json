@@ -31,7 +31,7 @@
     "@nexus/schema": "^0.15.0",
     "@prisma/client": "^2.4.1",
     "apollo-server-micro": "^2.16.1",
-    "graphql": "^14.7.0",
+    "graphql": "^15.3.0",
     "next": "9.5.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
@@ -63,11 +63,6 @@
     "prettier": "^2.0.2",
     "ts-node": "^8.10.2",
     "typescript": "^3.8.3"
-  },
-  "resolutions": {
-    "graphql": "14.7.0",
-    "@prisma/cli": "2.4.1",
-    "@prisma/client": "2.4.1"
   },
   "babel": {
     "presets": [
