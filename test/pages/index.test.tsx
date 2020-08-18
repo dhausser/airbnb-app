@@ -1,7 +1,7 @@
 import { InMemoryCache } from '@apollo/client'
 import { render, cleanup, waitFor } from '../test-utils'
 import { GET_POSTS_QUERY } from '../../apollo/queries'
-import { Home } from '../../pages/index'
+import Home from '../../pages/index'
 
 const cache = new InMemoryCache({ addTypename: false })
 const mockPosts = [

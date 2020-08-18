@@ -4,7 +4,7 @@ import { useApollo } from '../apollo/client'
 
 import '../styles/globals.css'
 
-const App: React.FC<AppPropsType> = ({ Component, pageProps }) => {
+function App({ Component, pageProps }: AppPropsType) {
   const apolloClient = useApollo(pageProps.initialApolloState)
 
   return (

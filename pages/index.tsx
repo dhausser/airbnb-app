@@ -14,7 +14,7 @@ import styles from '../styles/Home.module.css'
 
 type Post = PostsQueryTypes.PostsQuery_posts
 
-export const Home: React.FC = () => {
+function HomePage() {
   const { loading, error, data } = usePosts()
   const [deletePosts] = useDeletePosts()
   const lastPostId = useRef<string>()
@@ -67,4 +67,4 @@ export const getServerSideProps: GetServerSideProps = async () => {
   }
 }
 
-export default Home
+export default HomePage

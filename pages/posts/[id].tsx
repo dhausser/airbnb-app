@@ -13,7 +13,7 @@ import styles from '../../styles/Home.module.css'
 import * as PostQueryTypes from '../../__generated__/PostQuery'
 import { useUpdatePost } from '../../apollo/hooks'
 
-export const SinglePost: React.FC = () => {
+function SinglePost() {
   const router = useRouter()
   const { id } = router.query
   const [errorMsg, setErrorMsg] = useState<string>()
