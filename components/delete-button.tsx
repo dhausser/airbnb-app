@@ -4,7 +4,7 @@ import { useMutation } from '@apollo/client'
 
 import { getErrorMessage } from '../lib/form'
 import { DELETE_POST_MUTATION } from '../apollo/mutations'
-import * as DeletePostTypes from '../__generated__/DeletePost'
+import * as DeletePostTypes from '../apollo/__generated__/DeletePost'
 
 /**
  * TODO: Avoid rerender of post page after delete mutation is complete as it results in an error

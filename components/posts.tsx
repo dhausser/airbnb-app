@@ -2,7 +2,7 @@ import { useRef } from 'react'
 import { usePosts } from '../apollo/hooks'
 import { PostCard } from '../components/post-card'
 import { PostForm } from '../components/post-form'
-import * as PostsQueryTypes from '../__generated__/PostsQuery'
+import * as PostsQueryTypes from '../apollo/__generated__/PostsQuery'
 import styles from '../styles/Home.module.css'
 
 type Post = PostsQueryTypes.PostsQuery_posts

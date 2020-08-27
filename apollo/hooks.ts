@@ -8,12 +8,12 @@ import {
   DELETE_POSTS_MUTATION,
 } from './mutations'
 
-import * as PostQueryTypes from '../__generated__/PostQuery'
-import * as PostsQueryTypes from '../__generated__/PostsQuery'
-import * as CreateDraftMutationTypes from '../__generated__/CreateDraft'
-import * as UpdatePostTypes from '../__generated__/UpdatePost'
-import * as DeletePostMutationTypes from '../__generated__/DeletePost'
-import * as DeletePostsMutationTypes from '../__generated__/DeletePosts'
+import * as PostQueryTypes from './__generated__/PostQuery'
+import * as PostsQueryTypes from './__generated__/PostsQuery'
+import * as CreateDraftMutationTypes from './__generated__/CreateDraft'
+import * as UpdatePostTypes from './__generated__/UpdatePost'
+import * as DeletePostMutationTypes from './__generated__/DeletePost'
+import * as DeletePostsMutationTypes from './__generated__/DeletePosts'
 
 type ParsedUrlQuery = string | string[] | undefined
 

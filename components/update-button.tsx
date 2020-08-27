@@ -4,7 +4,7 @@ import { useMutation } from '@apollo/client'
 
 import { getErrorMessage } from '../lib/form'
 import { UPDATE_POST_MUTATION } from '../apollo/mutations'
-import * as UpdatePostTypes from '../__generated__/UpdatePost'
+import * as UpdatePostTypes from '../apollo/__generated__/UpdatePost'
 
 export const UpdateDraftButton: React.FC<UpdatePostTypes.UpdatePostVariables> = ({ id, title, content }) => {
   const [errorMsg, setErrorMsg] = useState<string>()

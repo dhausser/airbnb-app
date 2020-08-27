@@ -11,7 +11,7 @@
     "format": "prettier --write \"**/*.{js,ts,tsx}\"",
     "lint": "eslint . --ext ts --ext tsx --ext js",
     "test": "jest",
-    "codegen": "apollo client:codegen --outputFlat --target typescript"
+    "codegen": "apollo client:codegen --target typescript"
   },
   "husky": {
     "hooks": {

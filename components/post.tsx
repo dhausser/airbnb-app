@@ -8,7 +8,7 @@ import { useUpdatePost } from '../apollo/hooks'
 import { getErrorMessage } from '../lib/form'
 import useForm from '../lib/use-form'
 
-import * as PostQueryTypes from '../__generated__/PostQuery'
+import * as PostQueryTypes from '../apollo/__generated__/PostQuery'
 import styles from '../styles/Home.module.css'
 
 interface Props {

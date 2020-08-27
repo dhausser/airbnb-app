@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import { ApolloError } from '@apollo/client'
-import { PostQuery } from '../__generated__/PostQuery'
-import { PostsQuery } from '../__generated__/PostsQuery'
+import { PostQuery } from '../apollo/__generated__/PostQuery'
+import { PostsQuery } from '../apollo/__generated__/PostsQuery'
 
 import styles from '../styles/Home.module.css'
 

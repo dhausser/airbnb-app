@@ -6,7 +6,7 @@ import { useCreateDraft } from '../apollo/hooks'
 import { Field } from '../components/field'
 import { getErrorMessage } from '../lib/form'
 import { GET_POSTS_QUERY } from '../apollo/queries'
-import * as PostsQueryTypes from '../__generated__/PostsQuery'
+import * as PostsQueryTypes from '../apollo/__generated__/PostsQuery'
 
 import styles from '../styles/Home.module.css'
 
