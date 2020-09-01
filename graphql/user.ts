@@ -9,9 +9,11 @@ export const User = objectType({
     t.list.field('posts', {
       type: 'Post',
       async resolve(root, _args, ctx) {
-        const result = await ctx.prisma.post.findMany({
-          where: { authorId: root.id },
-        })
+        const result = await ctx.prisma.user
+          .findOne({
+            where: { id: root.id },
+          })
+          .posts()
         if (result === null) {
           throw new Error(`No user with id:${root.id}`)
         }

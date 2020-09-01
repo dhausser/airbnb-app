@@ -8,9 +8,11 @@ export const Profile = objectType({
     t.field('user', {
       type: 'User',
       async resolve(root, _args, ctx) {
-        const result = await ctx.prisma.user.findOne({
-          where: { id: root.userId },
-        })
+        const result = await ctx.prisma.profile
+          .findOne({
+            where: { id: root.id },
+          })
+          .user()
         if (result === null) {
           throw new Error(`No profile with id:${root.id}`)
         }
