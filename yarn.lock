@@ -1675,15 +1675,15 @@
   resolved "https://registry.yarnpkg.com/@prisma-labs/prettier-config/-/prettier-config-0.1.0.tgz#ef6cb5f89487974ca997516e9b39d5ccbefeeaad"
   integrity sha512-P0h2y+gnIxFP2HdsTYSYHWmabGBlxyVjnUepsrRe8gAF36mxOonGsbsQmKt/Q9H9CMjrSkFoDe5F5HLi2iW5/Q==
 
-"@prisma/cli@^2.6.0":
-  version "2.6.0"
-  resolved "https://registry.yarnpkg.com/@prisma/cli/-/cli-2.6.0.tgz#13c0eb640af5c03d6295dcb75befcfcc5a297ff3"
-  integrity sha512-zZubTQNI4z2zoJxsjh4ob2FxqZEi7pEpCDHcgNyyX1kmLtDtwwneuW6hJjdJDjPc8oVSOryJIOuWxlLeMyMgUw==
+"@prisma/cli@^2.6.1":
+  version "2.6.1"
+  resolved "https://registry.yarnpkg.com/@prisma/cli/-/cli-2.6.1.tgz#f10460bcd258957f326121abf27c0cbee3b1f264"
+  integrity sha512-xRFSVPwyUIvKaiQs00vVnv4kB3Po4kCA1aNjLaDNgn+k99RRasULQsGvt1nPrilIeFedii7Fn9nDyHixzw6llg==
 
-"@prisma/client@^2.6.0":
-  version "2.6.0"
-  resolved "https://registry.yarnpkg.com/@prisma/client/-/client-2.6.0.tgz#8b9ab0dc39dfbd2e0253d0177e0f65053a542ad1"
-  integrity sha512-BxYBn8PQ7ACh6p6q9JJNlODV8i50aZA9f+HwPGtff9jhIuoyFdM0eh1Qldib1ngTzt1UnxvacqlpXDHlnL93Pg==
+"@prisma/client@^2.6.1":
+  version "2.6.1"
+  resolved "https://registry.yarnpkg.com/@prisma/client/-/client-2.6.1.tgz#a68142fb878f040217cf0a348e1d81d7d103dcf8"
+  integrity sha512-voolWUPCFiFjrnErft9LjksQMgkVbxqD5lx6s7FoJ/qvguN9BPGyRG/Bwpy8v5yz6THgIoHsbHE2hJ0CMBzJFA==
   dependencies:
     pkg-up "^3.1.0"
 
@@ -1959,10 +1959,10 @@
   dependencies:
     "@types/istanbul-lib-report" "*"
 
-"@types/jest@^26.0.12":
-  version "26.0.12"
-  resolved "https://registry.yarnpkg.com/@types/jest/-/jest-26.0.12.tgz#0f20fef9e74f55a312530284e6178f3b3254f501"
-  integrity sha512-vZOFjm562IPb1EmaKxMjdcouxVb1l3NqoUH4XC4tDQ2R/AWde+0HXBUhyfc6L+7vc3mJ393U+5vr3nH2CLSVVg==
+"@types/jest@^26.0.13":
+  version "26.0.13"
+  resolved "https://registry.yarnpkg.com/@types/jest/-/jest-26.0.13.tgz#5a7b9d5312f5dd521a38329c38ee9d3802a0b85e"
+  integrity sha512-sCzjKow4z9LILc6DhBvn5AkIfmQzDZkgtVVKmGwVrs5tuid38ws281D4l+7x1kP487+FlKDh5kfMZ8WSPAdmdA==
   dependencies:
     jest-diff "^25.2.1"
     pretty-format "^25.2.1"
@@ -2025,10 +2025,10 @@
   resolved "https://registry.yarnpkg.com/@types/node/-/node-10.17.28.tgz#0e36d718a29355ee51cec83b42d921299200f6d9"
   integrity sha512-dzjES1Egb4c1a89C7lKwQh8pwjYmlOAG9dW1pBgxEk57tMrLnssOfEthz8kdkNaBd7lIqQx7APm5+mZ619IiCQ==
 
-"@types/node@^14.6.2":
-  version "14.6.2"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-14.6.2.tgz#264b44c5a28dfa80198fc2f7b6d3c8a054b9491f"
-  integrity sha512-onlIwbaeqvZyniGPfdw/TEhKIh79pz66L1q06WUQqJLnAb6wbjvOtepLYTGHTqzdXgBYIE3ZdmqHDGsRsbBz7A==
+"@types/node@^14.6.3":
+  version "14.6.3"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-14.6.3.tgz#cc4f979548ca4d8e7b90bc0180052ab99ee64224"
+  integrity sha512-pC/hkcREG6YfDfui1FBmj8e20jFU5Exjw4NYDm8kEdrW+mOh0T1Zve8DWKnS7ZIZvgncrctcNCXF4Q2I+loyww==
 
 "@types/normalize-package-data@^2.4.0":
   version "2.4.0"
